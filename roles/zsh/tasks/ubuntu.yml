@@ -1,0 +1,33 @@
+- name: install zsh
+  apt: name=zsh update_cache=yes
+  become: yes
+
+- name: change default shell
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: /bin/zsh
+  become: yes
+
+- name: install oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    clone: yes
+    depth: 1
+    accept_hostkey: true
+    force: yes # squashes any changes
+
+- name: install .zshrc
+  copy:
+    src: files/zshrc
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0644
+
+- name: install dotfiles
+  synchronize:
+    src: files/custom
+    dest: "{{ ansible_env.HOME}}/.oh-my-zsh/custom"
+    owner: yes
+    group: yes

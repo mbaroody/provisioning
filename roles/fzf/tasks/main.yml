@@ -1,0 +1,17 @@
+# common
+---
+# - name: install fzf
+#   homebrew: name=fzf state=present update_homebrew=yes
+#   when: ansible_distribution  == "MacOSX"
+
+- name: clone fzf
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest: "{{ ansible_env.HOME }}/.fzf"
+    depth: 1
+  # when: ansible_distribution  != "MacOSX"
+
+# TODO: depends on 'zsh'
+- name: run fzf install script
+  command: "{{ ansible_env.HOME }}/.fzf/install --no-fish"
+  # when: ansible_distribution  != "MacOSX"

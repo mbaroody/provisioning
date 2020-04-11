@@ -1,0 +1,28 @@
+---
+- name: install openvpn and Gnome GUI dependencies 
+  apt: 
+    name: "{{ packages }}"
+    update_cache: yes
+  vars:
+    packages: 
+    - openvpn 
+    - network-manager-openvpn 
+    - network-manager-openvpn-gnome
+  
+- name: install auth.txt
+  template: 
+    src: auth.j2
+    dest: /etc/openvpn/client/auth.txt
+    owner: root
+    group: root
+    mode: 0600
+
+- name: install region configuration files and certs
+  copy: 
+    src: "{{ item }}"
+    dest: /etc/openvpn/client/
+    owner: root
+    group: root
+    mode: 0644
+  with_fileglob:
+    - files/*

@@ -1,0 +1,47 @@
+- name: install packages to allow apt to use a repo over https
+  apt:
+    name: "{{ packages }}"
+    update_cache: yes
+  vars:
+    packages:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - software-properties-common
+  become: yes
+
+- name: add Docker's official GPG key
+  apt_key:
+    id: "9DC858229FC7DD38854AE2D88D81803C0EBFCD88"
+    url: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+  become: yes
+
+- name: get ubuntu release
+  shell: lsb_release -cs
+  register: ubuntu_release
+
+- name: add Docker repository
+  apt_repository:
+    repo: "deb [arch=amd64]
+      https://download.docker.com/linux/ubuntu
+      {{ ubuntu_release.stdout }} stable"
+    state: present
+  become: yes
+
+- name: install Docker
+  apt: name=docker-ce update_cache=yes
+  become: yes
+
+# for security concerns:
+# https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
+- name: create docker group for use without sudo
+  group: name=docker state=present
+  become: yes
+
+- name: add user to docker group
+  user:
+    name: "{{ ansible_env.USER }}"
+    groups: docker
+    append: yes
+  become: yes

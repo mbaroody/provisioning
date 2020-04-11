@@ -1,0 +1,2 @@
+- name: install iTerm2
+  homebrew:

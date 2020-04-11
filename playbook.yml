@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  roles:
+    - { role: base, tags: [ 'base' ] }
+    - { role: zsh, tags: [ 'zsh' ] }
+    - { role: vim, tags: [ 'vim' ] }
+    - { role: nvim, tags: [ 'nvim' ] }
+    - { role: fzf, tags: [ 'fzf' ] }
+    - { role: emacs, tags: [ 'emacs' ] }
+    - { role: tmux, tags: [ 'tmux' ] }
+    - { role: docker, tags: [ 'docker' ] }
+    - { role: iptables, tags: [ 'iptables' ] }
+    - { role: pia, when: "vpn_provider == 'pia'", tags: [ 'pia' ] }
