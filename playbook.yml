@@ -10,4 +10,4 @@
     - { role: tmux, tags: [ 'tmux' ] }
     - { role: docker, tags: [ 'docker' ] }
     - { role: iptables, tags: [ 'iptables' ] }
-    - { role: pia, when: "vpn_provider == 'pia'", tags: [ 'pia' ] }
+    - { role: pia, tags: [ 'pia' ] }

@@ -11,14 +11,14 @@
   when: ansible_distribution == "Ubuntu"
   become: yes
 
-- name: install python client/plugin host
-  pip: name=pynvim state=present extra_args=--user
-  when: ansible_distribution == "Ubuntu"
+# - name: install python client/plugin host
+# pip: name=pynvim state=present extra_args=--user
+# when: ansible_distribution == "Ubuntu"
 
 # TODO: make this user npm install
-- name: install nodejs client/plugin host
-  npm: name=neovim global=yes
-  become: yes
+# - name: install nodejs client/plugin host
+# npm: name=neovim global=yes
+# become: yes
 
 - name: synchronize dotfiles
   synchronize:
@@ -30,13 +30,16 @@
 ##########################################################
 # Install plugin manager + plugin dependencies
 ##########################################################
+- name: create autoload dir
+  file: path="{{ ansible_env.HOME }}/.config/nvim/autoload" state=directory 
+
 - name: install Plug
   uri:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     dest: "{{ ansible_env.HOME }}/.config/nvim/autoload/plug.vim"
 
-- name: install jedi for python completion
-  pip: name=jedi state=present extra_args=--user
+# - name: install jedi for python completion
+# pip: name=jedi state=present extra_args=--user
 
 - name: install plugins
   command: nvim -c "source {{ ansible_env.HOME }}/.config/nvim/init.vim" -c "PlugInstall" -c "qall"

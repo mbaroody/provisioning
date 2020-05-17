@@ -1,28 +1,36 @@
 ---
-- name: install openvpn and Gnome GUI dependencies 
-  apt: 
+- name: install openvpn and Gnome GUI dependencies
+  apt:
     name: "{{ packages }}"
     update_cache: yes
   vars:
-    packages: 
-    - openvpn 
-    - network-manager-openvpn 
+    packages:
+    - curl
     - network-manager-openvpn-gnome
-  
-- name: install auth.txt
-  template: 
-    src: auth.j2
-    dest: /etc/openvpn/client/auth.txt
-    owner: root
-    group: root
-    mode: 0600
+    - python2.7
+  become: yes
+  when: ansible_distribution == "Ubuntu"
 
-- name: install region configuration files and certs
-  copy: 
-    src: "{{ item }}"
-    dest: /etc/openvpn/client/
-    owner: root
-    group: root
-    mode: 0644
-  with_fileglob:
-    - files/*
+- name: Send PIA installer
+  get_url:
+    url: https://www.privateinternetaccess.com/installer/pia-nm.sh
+    dest: /tmp/pia-nm.sh
+    mode: 0700
+  become: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Execute PIA installer
+  expect:
+    echo: yes
+    command: /tmp/pia-nm.sh
+    responses:
+      (.*)PIA username(.*): "{{ pia_username }}"
+      (.*)Connection method(.*): "{{ pia_conn_method }}"
+      (.*)Strong encryption(.*): "{{ pia_strong_encryption }}"
+  become: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: Remove the zsh-installer.sh
+  file: path=/tmp/pia-nm.sh state=absent
+  when: ansible_distribution == "Ubuntu"
+  become: yes
