@@ -1,0 +1,33 @@
+---
+- name: clone lastpass-cli
+  git:
+    repo: https://github.com/lastpass/lastpass-cli.git
+    dest: "{{ ansible_env.HOME }}/.lastpass-cli"
+    depth: 1
+  when: ansible_distribution == "Ubuntu"
+
+- name: install lastpass-cli dependencies
+  apt:
+    name:
+    - bash-completion
+    - build-essential
+    - cmake
+    - libcurl4
+    - libcurl4-openssl-dev
+    - libssl-dev
+    - libxml2
+    - libxml2-dev
+    - libssl1.1
+    - pkg-config
+    - ca-certificates
+    - xclip
+    update_cache: yes
+  become: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: make install
+  shell: make install
+  args:
+    chdir: "{{ ansible_env.HOME }}/.lastpass-cli"
+  become: yes
+  when: ansible_distribution == "Ubuntu"

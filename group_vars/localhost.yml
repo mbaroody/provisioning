@@ -1,0 +1,3 @@
+vpn_provider: "pia"
+base_install_build_tools: "yes"
+base_install_cli_utilities: "yes"

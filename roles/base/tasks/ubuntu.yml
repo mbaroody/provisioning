@@ -1,3 +1,20 @@
 - name: update/upgrade system
   apt: update_cache=yes
   become: yes
+
+- name: install build tools
+  apt:
+    name:
+    - build-essential
+    - gcc
+    update_cache: yes
+  become: yes
+  when: base_install_build_tools == "yes"
+
+- name: install CLI utilities
+  apt:
+    name:
+    - htop
+    update_cache: yes
+  become: yes
+  when: base_install_cli_utilities == "yes"

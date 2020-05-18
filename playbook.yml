@@ -11,3 +11,4 @@
     - { role: docker, tags: [ 'docker' ] }
     - { role: iptables, tags: [ 'iptables' ] }
     - { role: pia, tags: [ 'pia' ] }
+    - { role: lastpass, tags: [ 'lastpass' ] }
