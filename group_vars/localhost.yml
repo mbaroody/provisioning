@@ -1,3 +1,4 @@
-vpn_provider: "pia"
-base_install_build_tools: "yes"
-base_install_cli_utilities: "yes"
+vpn_provider: pia
+base_install_build_tools: yes
+base_install_cli_utilities: yes
+r_mirror_ubuntu: https://cloud.r-project.org/bin/linux/ubuntu

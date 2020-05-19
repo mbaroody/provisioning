@@ -2,10 +2,10 @@
 - hosts: localhost
   vars_prompt:
     - name: git_username
-      prompt: "git_username"
+      prompt: 'git_username'
       private: no
     - name: git_password
-      prompt: "git_password"
+      prompt: 'git_password'
   roles:
     - { role: base, tags: [ 'base' ] }
     - { role: zsh, tags: [ 'zsh' ] }
@@ -19,3 +19,4 @@
     - { role: pia, tags: [ 'pia' ] }
     - { role: lastpass, tags: [ 'lastpass' ] }
     - { role: git, tags: [ 'git' ] }
+    - { role: r, tags: [ 'r' ] }
