@@ -2,21 +2,22 @@
 - hosts: localhost
   vars_prompt:
     - name: git_username
-      prompt: 'git_username'
+      prompt: "git_username"
       private: no
     - name: git_password
-      prompt: 'git_password'
+      prompt: "git_password"
   roles:
-    - { role: base, tags: [ 'base' ] }
-    - { role: zsh, tags: [ 'zsh' ] }
-    - { role: vim, tags: [ 'vim' ] }
-    - { role: nvim, tags: [ 'nvim' ] }
-    - { role: fzf, tags: [ 'fzf' ] }
-    - { role: emacs, tags: [ 'emacs' ] }
-    - { role: tmux, tags: [ 'tmux' ] }
-    - { role: docker, tags: [ 'docker' ] }
-    - { role: iptables, tags: [ 'iptables' ] }
-    - { role: pia, tags: [ 'pia' ] }
-    - { role: lastpass, tags: [ 'lastpass' ] }
-    - { role: git, tags: [ 'git' ] }
-    - { role: r, tags: [ 'r' ] }
+    - { role: base, tags: [ "base" ] }
+    - { role: zsh, tags: [ "zsh" ] }
+    - { role: vim, tags: [ "vim" ] }
+    - { role: nvim, tags: [ "nvim" ] }
+    - { role: fzf, tags: [ "fzf" ] }
+    - { role: emacs, tags: [ "emacs" ] }
+    - { role: tmux, tags: [ "tmux" ] }
+    - { role: docker, tags: [ "docker" ] }
+    - { role: iptables, tags: [ "iptables" ] }
+    - { role: pia, tags: [ "pia" ] }
+    - { role: lastpass, tags: [ "lastpass" ] }
+    - { role: git, tags: [ "git" ] }
+    - { role: r, tags: [ "r" ] }
+    - { role: microk8s, tags: [ "microk8s" ] }

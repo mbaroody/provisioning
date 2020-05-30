@@ -1,0 +1,22 @@
+- name: install microk8s
+  shell: snap install --classic --channel 1.18/stable microk8s
+  become: yes
+
+# for security concerns:
+# https://docs.docker.com/engine/security/security/#docker-daemon-attack-surface
+- name: create docker group for use without sudo
+  group: name=docker state=present
+  become: yes
+
+- name: add user to docker group
+  user:
+    name: "{{ ansible_env.USER }}"
+    groups: microk8s
+    append: yes
+  become: yes
+
+- name: Create a directory if it does not exist
+  file:
+    path: "{{ ansible_env.HOME }}/.kube"
+    state: directory
+    owner: "{{ ansible_env.USER }}"

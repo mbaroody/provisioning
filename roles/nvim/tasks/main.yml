@@ -20,6 +20,9 @@
 # npm: name=neovim global=yes
 # become: yes
 
+- name: mkdir -p "{{ ansible_env.HOME}}/.config/nvim/"
+  shell: mkdir -p "{{ ansible_env.HOME}}/.config/nvim/"
+
 - name: synchronize dotfiles
   synchronize:
     src: files/
