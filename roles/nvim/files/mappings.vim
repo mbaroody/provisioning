@@ -61,3 +61,5 @@ inoremap II <Esc>I
 inoremap AA <Esc>A
 " start editing on a new line above the current line
 inoremap OO <Esc>O
+
+nnoremap <leader>d :%bdelete<CR>
