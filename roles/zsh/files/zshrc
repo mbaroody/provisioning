@@ -112,3 +112,4 @@ lpsu () {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -x "$(command -v nvim)" ] && alias vim=nvim
+[ -x "$(command -v microk8s)" ] && alias helm=microk8s.helm && alias kubectl=microk8s.kubectl
