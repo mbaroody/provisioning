@@ -21,3 +21,4 @@
     - { role: git, tags: [ "git" ] }
     - { role: r, tags: [ "r" ] }
     - { role: microk8s, tags: [ "microk8s" ] }
+    - { role: code, tags: [ "code" ] }

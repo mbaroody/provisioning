@@ -8,7 +8,7 @@
   group: name=docker state=present
   become: yes
 
-- name: add user to docker group
+- name: add user to microk8s group
   user:
     name: "{{ ansible_env.USER }}"
     groups: microk8s

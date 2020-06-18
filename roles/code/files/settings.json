@@ -1,0 +1,37 @@
+{
+    "vs-kubernetes.kubeconfig": "${HOME}/.kube/config",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "python.jediEnabled": false,
+    "python.venvPath": "~/.virtualenvs",
+    "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/Users/michael.baroody/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
+    "vim.foldfix": true,
+    "vim.insertModeKeyBindingsNonRecursive": [{
+        "before": [ "j", "j" ],
+        "after": [ "<Esc>" ]
+    }],
+    "vim.normalModeKeyBindingsNonRecursive": [{
+        "before": [ "j" ],
+        "after": [ "g", "j" ]
+    }, {
+        "before": [ "k" ],
+        "after": [ "g", "k" ]
+    }],
+    "vim.vimrc.enable": false,
+    "window.zoomLevel": 1,
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "task.slowProviderWarning": [
+        "gradle"
+    ],
+    "terminal.integrated.rendererType": "dom",
+    "terminal.integrated.macOptionIsMeta": true,
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    "diffEditor.ignoreTrimWhitespace": false
+}
