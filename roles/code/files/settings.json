@@ -10,7 +10,6 @@
     },
     "python.jediEnabled": false,
     "python.venvPath": "~/.virtualenvs",
-    "java.jdt.ls.vmargs": "-noverify -Xmx1G -XX:+UseG1GC -XX:+UseStringDeduplication -javaagent:\"/Users/michael.baroody/.vscode/extensions/gabrielbb.vscode-lombok-1.0.1/server/lombok.jar\"",
     "vim.foldfix": true,
     "vim.insertModeKeyBindingsNonRecursive": [{
         "before": [ "j", "j" ],

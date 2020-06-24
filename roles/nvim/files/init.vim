@@ -1,54 +1,55 @@
 let mapleader = '-'
 
 call plug#begin('~/.nvim/plugged')
+
+" general plugins
+" Use release branch (recommend)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive' "  git
-Plug 'jreybert/vimagit' "  git
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-Plug 'scrooloose/nerdtree'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'pangloss/vim-javascript' "  syntax
-Plug 'leafgarland/typescript-vim' "  syntax
-Plug 'tpope/vim-cucumber'  "  syntax
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'SirVer/ultisnips' "  completions
-Plug 'honza/vim-snippets'
-Plug 'deoplete-plugins/deoplete-jedi' "  completions
-Plug 'carlitux/deoplete-ternjs' " completions
-" Plug 'python-mode/python-mode', { 'branch': 'master' }
-Plug 'chrisbra/csv.vim'
-"
-call plug#end()
-
-nnoremap <leader><C-f> :FZF<CR>
-
-" vim-airline
-let g:airline#extensions#ale#enabled = 1
 
 " fzf
-set rtp+=$HOME/.fzf/
+Plug 'junegunn/fzf.vim'
+" Plug '/usr/local/opt/fzf'
+
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
+Plug 'airblade/vim-gitgutter'
 
 " nerdtree
+Plug 'scrooloose/nerdtree'
+
+" python
+" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+" Plug 'davidhalter/jedi-vim'
+
+" vim-airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+call plug#end()
+
+"fzf
+set rtp+=$HOME/.fzf/
+nnoremap <leader><C-f> :FZF<CR>
+
+"nerdtree
 nnoremap <leader><C-n> :NERDTreeToggle<CR>
 
-" ale
-let g:ale_lint_on_text_changed = 'never'
+"python-mode"
+" let g:pymode_options_colorcolumn = 0
+" let g:pymode_run_bind = '<leader>R'
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-" autoclose Preview buffer
-" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+let g:airline#extensions#ale#enabled = 1
 
 " ultisnips
-let g:UltiSnipsExpandTrigger='<c-k>'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-let g:UltiSnipsEditSplit='vertical'
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.nvim/plugged/vim-snippets/UltiSnips', $HOME.'/.config/nvim/UltiSnips_custom']
+" let g:UltiSnipsExpandTrigger='<c-k>'
+" let g:UltiSnipsJumpForwardTrigger='<c-b>'
+" let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+" let g:UltiSnipsEditSplit='vertical'
+" let g:UltiSnipsSnippetDirectories=[$HOME.'/.nvim/plugged/vim-snippets/UltiSnips', $HOME.'/.config/nvim/UltiSnips_custom']
 
 " mappings
 source $HOME/.config/nvim/mappings.vim

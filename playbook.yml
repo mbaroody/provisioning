@@ -22,3 +22,4 @@
     - { role: r, tags: [ "r" ] }
     - { role: microk8s, tags: [ "microk8s" ] }
     - { role: code, tags: [ "code" ] }
+    - { role: nvm, tags: [ "nvm" ] }
