@@ -1,4 +1,8 @@
 " Mappings
+
+" easier navigation
+nnoremap j gj
+nnoremap k gk
 "
 " Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
 " which is the default
