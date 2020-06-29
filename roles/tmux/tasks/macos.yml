@@ -1,9 +1,0 @@
-- name: install tmux
-  homebrew: name=tmux state=present update_homebrew=yes
-
-- name: install dotfiles
-  copy:
-    src: tmux.conf
-    dest: "{{ ansible_env.HOME }}/.tmux.conf"
-    owner: "{{ ansible_env.USER }}"
-    mode: 0644
