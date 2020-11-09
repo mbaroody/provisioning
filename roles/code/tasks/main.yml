@@ -8,32 +8,32 @@
   command: brew cask install visual-studio-code
   when: ansible_facts['os_family'] == "Darwin"
 
-- name: Load a variable file based on the OS type, or a default if not found. Using free-form to specify the file.
-  include_vars: "{{ lookup('first_found', possible_files) }}"
-  vars:
-    possible_files:
-      - "{{ ansible_distribution }}.yaml"
-      - "{{ ansible_os_family }}.yaml"
+# - name: Load a variable file based on the OS type, or a default if not found. Using free-form to specify the file.
+#   include_vars: "{{ lookup('first_found', possible_files) }}"
+#   vars:
+#     possible_files:
+#       - "{{ ansible_distribution }}.yaml"
+#       - "{{ ansible_os_family }}.yaml"
 
-- name: create code_user_dir
-  file:
-    path: "{{ code_user_dir }}"
-    state: directory
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
+# - name: create code_user_dir
+#   file:
+#     path: "{{ code_user_dir }}"
+#     state: directory
+#     owner: "{{ ansible_env.USER }}"
+#     group: "{{ ansible_env.USER }}"
 
-- name: copy settings.json
-  copy:
-    src: files/settings.json
-    dest: "{{ code_user_dir }}/settings.json"
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
-    mode: 0644
+# - name: copy settings.json
+#   copy:
+#     src: files/settings.json
+#     dest: "{{ code_user_dir }}/settings.json"
+#     owner: "{{ ansible_env.USER }}"
+#     group: "{{ ansible_env.USER }}"
+#     mode: 0644
 
-- name: copy keybindings.json
-  copy:
-    src: files/keybindings.json
-    dest: "{{ code_user_dir }}/keybindings.json"
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
-    mode: 0644
+# - name: copy keybindings.json
+#   copy:
+#     src: files/keybindings.json
+#     dest: "{{ code_user_dir }}/keybindings.json"
+#     owner: "{{ ansible_env.USER }}"
+#     group: "{{ ansible_env.USER }}"
+#     mode: 0644

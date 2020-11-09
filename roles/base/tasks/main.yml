@@ -1,6 +1,28 @@
 ---
-- include: ubuntu.yml
+####  ubuntu #####
+- name: update/upgrade system
+  apt: update_cache=yes
+  become: yes
   when: ansible_distribution == "Ubuntu"
 
-- include: macos.yml
+- name: install build tools
+  apt:
+    name:
+    - build-essential
+    - gcc
+    update_cache: yes
+  become: yes
+  when: base_install_build_tools == "yes" and ansible_distribution == "Ubuntu"
+
+- name: install CLI utilities
+  apt:
+    name:
+    - htop
+    update_cache: yes
+  become: yes
+  when: base_install_cli_utilities  == "yes" and ansible_distribution == "Ubuntu"
+
+  #### MACOS #####
+- name: install homebrew
+  command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   when: ansible_distribution == "MacOSX"
