@@ -1,25 +1,59 @@
 ---
 - hosts: localhost
-  vars_prompt:
-    - name: git_username
-      prompt: "git_username"
-      private: no
-    - name: git_password
-      prompt: "git_password"
+  # vars_prompt:
+  #   - name: git_username
+  #     prompt: "git_username"
+  #     private: no
+  #   - name: git_password
+  #     prompt: "git_password"
+  tasks:
+    - name: Classify hosts depending on their OS distribution
+      group_by:
+        key: os_{{ ansible_facts['distribution'] }}
+
+    - name: debug
+      ansible.builtin.debug:
+        var: ansible_facts
+
+- hosts: os_MacOSX
   roles:
-    - { role: base, tags: [ "base" ] }
-    - { role: zsh, tags: [ "zsh" ] }
-    - { role: vim, tags: [ "vim" ] }
-    - { role: nvim, tags: [ "nvim" ] }
-    - { role: fzf, tags: [ "fzf" ] }
-    - { role: emacs, tags: [ "emacs" ] }
-    - { role: tmux, tags: [ "tmux" ] }
-    - { role: docker, tags: [ "docker" ] }
-    - { role: iptables, tags: [ "iptables" ] }
-    - { role: pia, tags: [ "pia" ] }
-    - { role: lastpass, tags: [ "lastpass" ] }
-    - { role: git, tags: [ "git" ] }
-    - { role: r, tags: [ "r" ] }
-    - { role: microk8s, tags: [ "microk8s" ] }
-    - { role: code, tags: [ "code" ] }
-    - { role: nvm, tags: [ "nvm" ] }
+    - geerlingguy.homebrew
+    - iterm2
+
+- hosts: os_Ubuntu
+  roles:
+    - { role: microk8s, tags: [ "extra" ] }
+
+- hosts: localhost
+  roles:
+    - base
+    - zsh
+    - nvim
+    - vscode
+    - fzf
+    - tmux
+    - { role: docker, tags: [ "extra" ] }
+    - { role: pia, tags: [ "extra" ] }
+    - { role: lastpass, tags: [ "extra" ] }
+    # - { role: git, tags: [ "extra" ] }
+    # - { role: r, tags: [ "extra" ] }
+    # - { role: nvm, tags: [ "extra" ] }
+
+
+  #   - { role: base, tags: [ "base" ] }
+  #   - { role: zsh, tags: [ "zsh" ] }
+  #   - { role: vim, tags: [ "vim" ] }
+  #   - { role: nvim, tags: [ "nvim" ] }
+  #   - { role: fzf, tags: [ "fzf" ] }
+  #   - { role: emacs, tags: [ "emacs" ] }
+  #   - { role: tmux, tags: [ "tmux" ] }
+  #   - { role: docker, tags: [ "docker" ] }
+  #   - { role: iptables, tags: [ "iptables" ] }
+  #   - { role: pia, tags: [ "pia" ] }
+  #   - { role: lastpass, tags: [ "lastpass" ] }
+  #   - { role: iterm2, tags: [ "iterm2" ] }
+  #   - { role: git, tags: [ "git" ] }
+  #   - { role: r, tags: [ "r" ] }
+  #   - { role: microk8s, tags: [ "microk8s" ] }
+  #   - { role: code, tags: [ "code" ] }
+  #   - { role: nvm, tags: [ "nvm" ] }

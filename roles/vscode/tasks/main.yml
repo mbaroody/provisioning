@@ -5,7 +5,11 @@
   when: ansible_facts['os_family'] == "Debian"
 
 - name: install code
-  command: brew cask install visual-studio-code
+  homebrew_cask:
+    name: visual-studio-code
+    state: installed
+    update_homebrew: yes
+    install_options: "debug"
   when: ansible_facts['os_family'] == "Darwin"
 
 # - name: Load a variable file based on the OS type, or a default if not found. Using free-form to specify the file.
