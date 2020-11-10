@@ -9,18 +9,18 @@
       ansible.builtin.debug:
         var: ansible_facts
 
+# base
 - hosts: os_MacOSX
   roles:
     - geerlingguy.homebrew
-    - iterm2
 
 - hosts: os_Ubuntu
   roles:
-    - { role: microk8s, tags: [ "extra" ] }
+    - base
 
+# common
 - hosts: localhost
   roles:
-    - base
     - zsh
     - nvim
     - vscode
@@ -29,3 +29,12 @@
     - { role: docker, tags: [ "extra" ] }
     - { role: pia, tags: [ "extra" ] }
     - { role: lastpass, tags: [ "extra" ] }
+
+# extra
+- hosts: os_MacOSX
+  roles:
+    - { role: iterm2, tags: [ "extra" ] }
+
+- hosts: os_Ubuntu
+  roles:
+    - { role: microk8s, tags: [ "extra" ] }
