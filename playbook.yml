@@ -27,8 +27,8 @@
     - fzf
     - tmux
     - { role: docker, tags: [ "extra" ] }
-    - { role: pia, tags: [ "extra" ] }
     - { role: lastpass, tags: [ "extra" ] }
+    # - { role: pia, tags: [ "extra" ] }
 
 # extra
 - hosts: os_MacOSX
