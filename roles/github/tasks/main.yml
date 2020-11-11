@@ -1,8 +1,12 @@
 ---
+- name: set github key name
+  set_fact:
+    github_ssh_key_title: "{{ github_ssh_key_title | default(ansible_user_id) }}"
+
 - name: generate ssh key for git
   openssh_keypair:
-    path: "{{ ansible_env.HOME }}/.ssh/git_id_rsa"
-    comment: "{{ git_email }}"
+    path: "{{ ansible_env.HOME }}/.ssh/id_rsa"
+    comment: "{{ github_ssh_key_title }}"
     type: rsa
     size: 4096
     mode: 0600
@@ -12,13 +16,13 @@
   uri:
     url: https://api.github.com/user/keys
     method: POST
-    url_username: "{{ git_username }}"
-    url_password: "{{ git_password }}"
+    url_username: "{{ github_username | mandatory }}"
+    url_password: "{{ github_password | mandatory }}"
     headers:
       Accept: application/vnd.github.v3+json
     body_format: json
     body:
-      title: "{{ git_ssh_key_title }}"
+      title: "{{ github_ssh_key_title }}"
       key: "{{ keypair.public_key }}"
     status_code: [ 201, 422 ]
     force_basic_auth: yes
