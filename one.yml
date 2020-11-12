@@ -1,0 +1,41 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Classify hosts depending on their OS distribution
+      group_by:
+        key: os_{{ ansible_facts['distribution'] }}
+
+    - name: debug
+      ansible.builtin.debug:
+        var: ansible_facts
+        verbosity: 2
+
+# base
+- hosts: os_MacOSX
+  roles:
+    - { role: geerlingguy.homebrew, tags: [ "geerlingguy.homebrew" ] }
+
+- hosts: os_Ubuntu
+  roles:
+    - { role: base, tags: [ "base" ] }
+
+# common
+- hosts: localhost
+  roles:
+    - { role: zsh, tags: [ "zsh" ] }
+    - { role: nvim, tags: [ "nvim" ] }
+    - { role: vscode, tags: [ "vscode" ] }
+    - { role: fzf, tags: [ "fzf" ] }
+    - { role: tmux, tags: [ "tmux" ] }
+    - { role: docker, tags: [ "docker" ] }
+    - { role: lastpass, tags: [ "lastpass" ] }
+    - { role: node, tags: [ "node" ] }
+
+# extra
+- hosts: os_MacOSX
+  roles:
+    - { role: iterm2, tags: [ "iterm2" ] }
+
+- hosts: os_Ubuntu
+  roles:
+    - { role: microk8s, tags: [ "microk8" ] }

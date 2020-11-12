@@ -36,6 +36,7 @@
     - docker
     - lastpass
     - github
+    - node
 
 # extra
 - hosts: os_MacOSX

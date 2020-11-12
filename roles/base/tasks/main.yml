@@ -11,6 +11,7 @@
     name:
     - build-essential
     - gcc
+    - curl
     update_cache: yes
   become: yes
   when: ansible_distribution == "Ubuntu"
