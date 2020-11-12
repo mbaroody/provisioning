@@ -31,3 +31,11 @@
     chdir: "{{ ansible_env.HOME }}/.lastpass-cli"
   become: yes
   when: ansible_distribution == "Ubuntu"
+
+### MACOS ###
+- name: install
+  homebrew_cask:
+    name: lastpass
+    state: present
+    update_homebrew: yes
+  when: ansible_distribution == "MacOSX"

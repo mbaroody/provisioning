@@ -18,5 +18,4 @@
     src: files/tmux.conf
     dest: "{{ ansible_env.HOME }}/.tmux.conf"
     owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
     mode: 0644

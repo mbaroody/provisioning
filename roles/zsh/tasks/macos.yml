@@ -21,10 +21,3 @@
     dest: "{{ ansible_env.HOME }}/.zshrc"
     owner: "{{ ansible_env.USER }}"
     mode: 0644
-
-- name: install custom zsh plugins
-  synchronize:
-    src: "files/custom/"
-    dest: "{{ ansible_env.HOME}}/.oh-my-zsh/custom/"
-    owner: yes
-    group: yes

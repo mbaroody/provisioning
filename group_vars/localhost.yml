@@ -1,7 +1,1 @@
-base_install_build_tools: yes
-base_install_cli_utilities: yes
-git_email: "********"
-git_username: "********"
-git_ssh_key_title: "my_pc"
-r_mirror_ubuntu: https://cloud.r-project.org/bin/linux/ubuntu
 vpn_provider: pia

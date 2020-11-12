@@ -1,10 +1,7 @@
 ---
-- include: ubuntu.yml
-  when: ansible_distribution == "Ubuntu"
-
-- name: install docker
+- name: install iTerm2
   homebrew_cask:
-    name: docker
+    name: iterm2
     state: present
     update_homebrew: yes
   when: ansible_distribution == "MacOSX"

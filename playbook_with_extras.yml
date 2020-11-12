@@ -21,9 +21,28 @@
 
 # common
 - hosts: localhost
+  vars_prompt:
+    - name: github_username
+      prompt: "Github username"
+      private: no
+    - name: github_password
+      prompt: "Github password"
   roles:
     - zsh
     - nvim
     - vscode
     - fzf
     - tmux
+    - docker
+    - lastpass
+    - github
+    - node
+
+# extra
+- hosts: os_MacOSX
+  roles:
+    - iterm2
+
+- hosts: os_Ubuntu
+  roles:
+    - microk8s
