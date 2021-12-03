@@ -2,12 +2,13 @@
 - name: get latest tags
   uri:
     url: https://api.github.com/repos/nvm-sh/nvm/tags
-    method: GET  
+    method: GET
     headers:
       Accept: application/vnd.github.v3+json
   register: uri_res
 
 - debug: var=uri_res.json[0].name verbosity=2
+- debug: var=ansible_dependent_role_names verbosity=2
 
 - name: install latest nvm
   shell: >
@@ -15,6 +16,6 @@
   args:
   #   creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
     warn: false
-  
+
 - name: install latest version of node
-  shell: '[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && nvm install node'
+  shell: 'export NVM_DIR="{{ ansible_env.HOME }}/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && nvm install node'
