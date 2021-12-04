@@ -5,6 +5,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "macOS" do |mac|
     mac.vm.box = "ramsey/macos-catalina"
+    mac.vm.synced_folder ".", "/vagrant"
   end
 
   config.vm.define "ubuntu" do |ubuntu|
