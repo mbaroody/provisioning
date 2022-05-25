@@ -1,7 +1,7 @@
 let mapleader = '-'
 
 call plug#begin('~/.nvim/plugged')
-
+Plug 'pearofducks/ansible-vim'
 " general plugins
 " Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -9,13 +9,19 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 
+Plug 'puremourning/vimspector'
+Plug 'szw/vim-maximizer'
+
+Plug 'godlygeek/tabular'
+" Plug 'preservim/vim-markdown'
+
 " fzf
 Plug 'junegunn/fzf.vim'
 " Plug '/usr/local/opt/fzf'
 
 " git
 Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
+" Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
 
 " nerdtree
@@ -29,11 +35,23 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+" language
+Plug 'sheerun/vim-polyglot'
+
+" mustache
+" Plug 'juvenn/mustache.vim'
+" Plug 'mustache/vim-mustache-handlebars'
+
+"groovy
+Plug 'vim-scripts/groovy.vim'
+
 call plug#end()
 
 "fzf
 set rtp+=$HOME/.fzf/
-nnoremap <leader><C-f> :FZF<CR>
+nnoremap <leader><C-f> :GFiles<CR>
+nnoremap <leader>F :Rg<CR>
+nnoremap <leader>: :History:<CR>
 
 "nerdtree
 nnoremap <leader><C-n> :NERDTreeToggle<CR>
