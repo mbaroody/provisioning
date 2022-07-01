@@ -9,7 +9,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "ubuntu" do |ubuntu|
-    ubuntu.vm.box = "ubuntu/focal64"
+    ubuntu.vm.box = "generic/ubuntu2004"
+    ubuntu.vm.synced_folder ".", "/vagrant"
   end
 
   config.vm.provider "virtualbox" do |vb|
