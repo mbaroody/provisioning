@@ -66,3 +66,8 @@ Session.vim
 tags
 # Persistent undo
 [._]*.un~
+
+roles/elliotweiser.osx-command-line-tools
+roles/geerlingguy.homebrew
+
+.vagrant

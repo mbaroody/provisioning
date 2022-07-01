@@ -1,10 +1,14 @@
 ---
-- include: ubuntu.yml
-  when: ansible_distribution == "Ubuntu"
-
-- name: install docker
+- name: install docker (macos)
   homebrew_cask:
     name: docker
     state: present
     update_homebrew: yes
   when: ansible_distribution == "MacOSX"
+
+- name: install docker (ubuntu)
+  snap:
+    name: docker
+    state: present
+  become: yes
+  when: ansible_distribution == "Ubuntu"

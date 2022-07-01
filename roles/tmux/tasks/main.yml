@@ -19,3 +19,6 @@
     dest: "{{ ansible_env.HOME }}/.tmux.conf"
     owner: "{{ ansible_env.USER }}"
     mode: 0644
+
+- name: install tpm plugins
+  shell: 'export TMUX_PLUGIN_MANAGER_PATH="{{ ansible_env.HOME }}/.tmux/plugins/" && {{ ansible_env.HOME }}/.tmux/plugins/tpm/scripts/install_plugins.sh'

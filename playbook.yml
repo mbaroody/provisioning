@@ -1,29 +1,21 @@
 ---
-- hosts: localhost
+- hosts: all
   tasks:
     - name: Classify hosts depending on their OS distribution
       group_by:
         key: os_{{ ansible_facts['distribution'] }}
 
-    - name: debug
-      ansible.builtin.debug:
-        var: ansible_facts
-        verbosity: 2
-
-# base
 - hosts: os_MacOSX
   roles:
     - geerlingguy.homebrew
 
-- hosts: os_Ubuntu
+- hosts: all
   roles:
     - base
-
-# common
-- hosts: localhost
-  roles:
-    - zsh
-    - nvim
-    - vscode
+    - docker
     - fzf
+    - iterm2
+    - node
+    - nvim
     - tmux
+    - zsh

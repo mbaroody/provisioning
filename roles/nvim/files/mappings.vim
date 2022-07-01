@@ -29,9 +29,8 @@ nnoremap k gk
 " which is the default
 map Y y$
 
-" Map <C-L> (redraw screen) to also turn off search highlighting until the
-" next search
-nnoremap <C-L> :nohl<CR><C-L>
+" turn off search highlighting until the next search
+nnoremap <C-c> :nohl<CR>
 
 "indent shortcuts
 nnoremap <space> zO
@@ -91,6 +90,10 @@ inoremap AA <Esc>A
 inoremap OO <Esc>O
 
 nnoremap <leader>D :%bdelete<CR>
+
+" horizontal scrolling
+nnoremap <C-L> 20zl " Scroll 20 characters to the right
+nnoremap <C-H> 20zh " Scroll 20 characters to the left
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -168,8 +171,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader><C-f>  <Plug>(coc-format-selected)
+nmap <leader><C-f>  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!

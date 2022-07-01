@@ -1,57 +1,44 @@
 let mapleader = '-'
 
 call plug#begin('~/.nvim/plugged')
-Plug 'pearofducks/ansible-vim'
-" general plugins
-" Use release branch (recommend)
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
-
+Plug 'sheerun/vim-polyglot'
 Plug 'puremourning/vimspector'
-Plug 'szw/vim-maximizer'
-
 Plug 'godlygeek/tabular'
-" Plug 'preservim/vim-markdown'
-
-" fzf
 Plug 'junegunn/fzf.vim'
-" Plug '/usr/local/opt/fzf'
-
-" git
 Plug 'tpope/vim-fugitive'
-" Plug 'jreybert/vimagit'
 Plug 'airblade/vim-gitgutter'
-
-" nerdtree
-Plug 'scrooloose/nerdtree'
-
-" python
 " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 " Plug 'davidhalter/jedi-vim'
-
-" vim-airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-" language
-Plug 'sheerun/vim-polyglot'
-
-" mustache
-" Plug 'juvenn/mustache.vim'
-" Plug 'mustache/vim-mustache-handlebars'
-
-"groovy
-Plug 'vim-scripts/groovy.vim'
-
+Plug 'EdenEast/nightfox.nvim'
 call plug#end()
+
+" coc extensions
+let g:coc_global_extensions = [
+  \'coc-tsserver',
+  \'coc-swagger',
+  \'coc-solargraph',
+  \'coc-python',
+  \'coc-metals',
+  \'coc-json',
+  \'coc-java',
+  \'coc-spell-checker'
+\]
 
 "fzf
 set rtp+=$HOME/.fzf/
-nnoremap <leader><C-f> :GFiles<CR>
-nnoremap <leader>F :Rg<CR>
+nnoremap <leader>f :GFiles<CR>
+nnoremap <leader>s :Rg<CR>
+nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>: :History:<CR>
+
+colorscheme terafox
 
 "nerdtree
 nnoremap <leader><C-n> :NERDTreeToggle<CR>

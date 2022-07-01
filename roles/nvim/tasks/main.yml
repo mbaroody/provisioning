@@ -42,5 +42,5 @@
     nvim
       -c "source {{ ansible_env.HOME }}/.config/nvim/init.vim" \
       -c "PlugInstall" \
-      -c "CocInstall -sync coc-json coc-html coc-python coc-css coc-tsserver coc-tslint" \
-      -c "qall" \
+      -c "CocInstall -sync" \
+      -c "qall"
