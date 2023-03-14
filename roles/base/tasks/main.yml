@@ -1,13 +1,14 @@
 ---
 ####  ubuntu #####
 - name: update/upgrade system
-  apt:
-    update_cache: yes
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: yes
   become: yes
   when: ansible_distribution == "Ubuntu"
 
 - name: install build tools
-  apt:
+  ansible.builtin.apt:
     name:
     - build-essential
     - gcc

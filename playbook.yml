@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: localhost
   tasks:
     - name: Classify hosts depending on their OS distribution
       group_by:
@@ -9,12 +9,14 @@
   roles:
     - geerlingguy.homebrew
 
-- hosts: all
+- hosts: localhost
   roles:
     - base
     - docker
     - fzf
     - iterm2
+    - awsvpn
+    - java-developer
     - node
     - nvim
     - tmux

@@ -44,3 +44,9 @@
       -c "PlugInstall" \
       -c "CocInstall -sync" \
       -c "qall"
+
+- name: install ripgrep for fuzzy searching files
+  community.general.snap:
+    name: ripgrep
+    classic: true
+  become: yes

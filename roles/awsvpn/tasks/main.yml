@@ -1,0 +1,36 @@
+---
+# https://docs.aws.amazon.com/vpn/latest/clientvpn-user/client-vpn-connect-linux.html
+
+- name: update apt cache with AWS repo
+  ansible.builtin.shell: |
+    wget -q -O - https://d20adtppz83p9s.cloudfront.net/GTK/latest/debian-repo/awsvpnclient_public_key.asc | \
+      sudo apt-key add -
+  when: ansible_distribution == "Ubuntu"
+  become: yes
+
+- name: update apt cache with AWS repo
+  ansible.builtin.shell: |
+    echo "deb [arch=amd64] https://d20adtppz83p9s.cloudfront.net/GTK/latest/debian-repo ubuntu-20.04 main" | \
+      sudo tee /etc/apt/sources.list.d/aws-vpn-client.list
+  when: ansible_distribution == "Ubuntu"
+  become: yes
+
+- name: download libssl workaround for 22.04
+  ansible.builtin.get_url:
+    url: http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+    dest: "{{ ansible_env.HOME }}/Downloads/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb"
+    mode: "0440"
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"
+
+- name: install libssl workaround for 22.04
+  ansible.builtin.shell: dpkg -i "{{ ansible_env.HOME }}/Downloads/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb"
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"
+  become: yes
+
+- name: install aws vpn client (ubuntu)
+  ansible.builtin.apt:
+    name: awsvpnclient
+    state: present
+    update_cache: yes
+  when: ansible_distribution == "Ubuntu"
+  become: yes

@@ -6,4 +6,4 @@
     depth: 1
 
 - name: run fzf install script
-  command: "{{ ansible_env.HOME }}/.fzf/install --no-fish"
+  command: "{{ ansible_env.HOME }}/.fzf/install"
