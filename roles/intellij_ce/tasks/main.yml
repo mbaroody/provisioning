@@ -1,0 +1,16 @@
+---
+# install intellij ce
+- name: install intellij community edit
+  community.general.snap:
+    name: intellij-idea-community
+    classic: true
+  become: yes
+
+- name: install ideavimrc for vim keybindings
+  ansible.builtin.copy:
+    src: files/ideavimrc
+    dest: "{{ ansible_env.HOME }}/.ideavimrc"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    mode: "0644"
+  when: intellij_ce_vim

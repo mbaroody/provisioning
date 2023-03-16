@@ -1,12 +1,5 @@
 ---
 # https://docs.aws.amazon.com/vpn/latest/clientvpn-user/client-vpn-connect-linux.html
-
 - name: install sdkman
   ansible.builtin.shell: wget -qO- https://get.sdkman.io | bash
   when: ansible_distribution == "Ubuntu"
-
-- name: install Intellij Community Edition
-  community.general.snap:
-    name: intellij-idea-community
-    classic: true
-  become: yes

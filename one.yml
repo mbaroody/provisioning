@@ -14,10 +14,10 @@
     - { role: base, tags: [ "base" ] }
     - { role: docker, tags: [ "docker" ] }
     - { role: fzf, tags: [ "fzf" ] }
-    - { role: intellij-ce, tags: [ "intellij-ce" ] }
-    - { role: awsvpn, tags: [ "awsvpn" ] }
-    - { role: java-developer, tags: [ "java-developer" ] }
-    - { role: node, tags: [ "node" ] }
+    - { role: intellij_ce, tags: [ "intellij_ce" ] }
+    - { role: aws_vpn, tags: [ "aws_vpn" ] }
+    - { role: java_developer, tags: [ "java_developer" ] }
+    - { role: javascript_developer, tags: [ "node_developer" ] }
     - { role: nvim, tags: [ "nvim" ] }
     - { role: tmux, tags: [ "tmux" ] }
     - { role: zsh, tags: [ "zsh" ] }

@@ -16,8 +16,9 @@
     - fzf
     - iterm2
     - awsvpn
-    - java-developer
-    - node
+    - intellij_ce
+    - java_developer
+    - node_developer
     - nvim
     - tmux
     - zsh
