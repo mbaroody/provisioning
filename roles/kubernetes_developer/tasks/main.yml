@@ -1,0 +1,40 @@
+---
+- name: find latest release version
+  ansible.builtin.uri:
+    url: https://dl.k8s.io/release/stable.txt
+    method: GET
+    return_content: true
+  register: latest_release_response
+  when: ansible_distribution == "Ubuntu"
+
+# do this manually since could not get https://docs.ansible.com/ansible/latest/collections/ansible/builtin/get_url_module.html#parameter-checksum to work
+- name: download kubectl checksum
+  ansible.builtin.get_url:
+    url: "https://dl.k8s.io/{{ latest_release_response.content }}/bin/linux/amd64/kubectl.sha256"
+    dest: /tmp/kubectl.sha256
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0444
+  when: ansible_distribution == "Ubuntu"
+
+- name: download kubectl
+  ansible.builtin.get_url:
+    url: "https://dl.k8s.io/release/{{ latest_release_response.content }}/bin/linux/amd64/kubectl"
+    dest: /tmp/kubectl
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: 0644
+  when: ansible_distribution == "Ubuntu"
+
+- name: manual checksum
+  ansible.builtin.shell: echo "$(cat /tmp/kubectl.sha256)  /tmp/kubectl" | sha256sum --check
+  register: checksum_response
+
+- name: manual checksum
+  fail:
+    msg: "checksum failed"
+  when: checksum_response.stdout_lines is not search("/tmp/kubectl.*OK")
+
+- name: install kubectl
+  ansible.builtin.shell: install -o root -g root -m 0755 /tmp/kubectl /usr/local/bin/kubectl
+  become: yes

@@ -1,0 +1,6 @@
+---
+- name: install spotify
+  community.general.snap:
+    name: spotify
+  become: yes
+  when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"

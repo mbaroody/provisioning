@@ -7,9 +7,9 @@
   when: ansible_distribution == "MacOSX"
 
 - name: install nvim (Ubuntu)
-  apt: name=neovim state=present update_cache=yes
-  when: ansible_distribution == "Ubuntu"
+  community.general.snap: name=nvim classic=true
   become: yes
+  when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"
 
 - name: mkdir "{{ ansible_env.HOME}}/.config/nvim/"
   file:
@@ -46,7 +46,15 @@
       -c "qall"
 
 - name: install ripgrep for fuzzy searching files
-  community.general.snap:
-    name: ripgrep
-    classic: true
+  community.general.snap: name=ripgrep classic=true
   become: yes
+  when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"
+
+- name: configure shell (zsh only)
+  ansible.builtin.copy:
+    src: files/nvim.zsh
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/nvim.zsh"
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    mode: 0644
+  when: preferred_shell == "zsh"

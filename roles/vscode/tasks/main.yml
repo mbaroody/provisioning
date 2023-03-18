@@ -1,8 +1,8 @@
 ---
 - name: install code
-  snap: name=code state=present
+  community.general.snap: name=code state=present
   become: yes
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"
 
 - name: install code
   homebrew_cask:

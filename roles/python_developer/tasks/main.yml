@@ -1,0 +1,44 @@
+---
+- name: download pyenv installer
+  ansible.builtin.get_url:
+    url: https://pyenv.run
+    dest: /tmp/pyenv-installer.sh
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    mode: 0500
+  become: yes
+
+- name: run pyenv installer
+  ansible.builtin.shell: /tmp/pyenv-installer.sh
+  args:
+    creates: "{{ ansible_env.HOME }}/.pyenv/"
+
+- name: configure shell (zsh only)
+  ansible.builtin.copy:
+    src: files/pyenv.zsh
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/pyenv.zsh"
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    mode: 0644
+  when: preferred_shell == "zsh"
+
+- name: install Python build dependencies
+  ansible.builtin.apt:
+    update_cache: yes
+    pkg:
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - curl
+      - libncursesw5-dev
+      - xz-utils
+      - tk-dev
+      - libxml2-dev
+      - libxmlsec1-dev
+      - libffi-dev
+      - liblzma-dev
+  become: yes
+  when: ansible_distribution == "Ubuntu"

@@ -19,3 +19,12 @@
 
 - name: install latest version of node
   shell: 'export NVM_DIR="{{ ansible_env.HOME }}/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && nvm install node'
+
+- name: configure shell (zsh only)
+  ansible.builtin.copy:
+    src: files/nvm.zsh
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/nvm.zsh"
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    mode: 0644
+  when: preferred_shell == "zsh"

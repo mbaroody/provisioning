@@ -16,7 +16,6 @@ Plug 'airblade/vim-gitgutter'
 " Plug 'davidhalter/jedi-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'EdenEast/nightfox.nvim'
 call plug#end()
 
 " coc extensions
@@ -37,8 +36,6 @@ nnoremap <leader>f :GFiles<CR>
 nnoremap <leader>s :Rg<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>: :History:<CR>
-
-colorscheme terafox
 
 "nerdtree
 nnoremap <leader><C-n> :NERDTreeToggle<CR>

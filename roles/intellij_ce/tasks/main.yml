@@ -5,12 +5,13 @@
     name: intellij-idea-community
     classic: true
   become: yes
+  when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"
 
 - name: install ideavimrc for vim keybindings
   ansible.builtin.copy:
     src: files/ideavimrc
     dest: "{{ ansible_env.HOME }}/.ideavimrc"
-    owner: "{{ ansible_user_id }}"
-    group: "{{ ansible_user_gid }}"
-    mode: "0644"
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    mode: 0644
   when: intellij_ce_vim

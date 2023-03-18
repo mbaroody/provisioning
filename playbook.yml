@@ -10,15 +10,21 @@
     - geerlingguy.homebrew
 
 - hosts: localhost
+  vars:
+    preferred_shell: zsh
+    intellij_ce_vim: true
   roles:
     - base
-    - docker
-    - fzf
-    - iterm2
-    - awsvpn
-    - intellij_ce
-    - java_developer
-    - node_developer
-    - nvim
-    - tmux
     - zsh
+    - tmux
+    - nvim
+    - fzf
+    - docker
+    - java_developer
+    - intellij_ce
+    - javascript_developer
+    - python_developer
+    - aws_developer
+    - kubernetes_developer
+    - dbeaver
+    - spotify

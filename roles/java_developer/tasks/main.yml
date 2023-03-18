@@ -1,5 +1,20 @@
 ---
-# https://docs.aws.amazon.com/vpn/latest/clientvpn-user/client-vpn-connect-linux.html
-- name: install sdkman
-  ansible.builtin.shell: wget -qO- https://get.sdkman.io | bash
-  when: ansible_distribution == "Ubuntu"
+- name: download sdkman installer
+  ansible.builtin.get_url:
+    url: https://get.sdkman.io
+    dest: /tmp/sdkman-installer.sh
+    mode: 0500
+  become: yes
+
+- name: run sdkman installer
+  ansible.builtin.shell: /tmp/sdkman-installer.sh
+  become: yes
+
+- name: configure shell (zsh only)
+  ansible.builtin.copy:
+    src: files/sdkman.zsh
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/sdkman.zsh"
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    mode: 0644
+  when: preferred_shell == "zsh"

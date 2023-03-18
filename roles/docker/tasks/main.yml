@@ -7,8 +7,8 @@
   when: ansible_distribution == "MacOSX"
 
 - name: install docker (ubuntu)
-  snap:
+  community.general.snap:
     name: docker
     state: present
   become: yes
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"

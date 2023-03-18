@@ -1,0 +1,70 @@
+---
+# AWS VPN Instructions
+# https://docs.aws.amazon.com/vpn/latest/clientvpn-user/client-vpn-connect-linux.html
+
+- name: download awsvpnclient public key
+  ansible.builtin.get_url:
+    url: https://d20adtppz83p9s.cloudfront.net/GTK/latest/debian-repo/awsvpnclient_public_key.asc
+    dest: /tmp/awsvpnclient_public_key.asc
+    mode: 0444
+  become: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: update apt cache with awsvpnclient public key
+  ansible.builtin.shell: apt-key add /tmp/awsvpnclient_public_key.asc
+  become: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: update apt cache with AWS repo
+  ansible.builtin.copy:
+    src: files/aws-vpn-client.list
+    dest: "/etc/apt/sources.list.d/aws-vpn-client.list"
+    owner: root
+    group: root
+    mode: 0400
+  become: yes
+
+- name: download libssl workaround for 22.04
+  ansible.builtin.get_url:
+    url: http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+    dest: "/tmp/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb"
+    mode: "0440"
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"
+
+- name: install libssl workaround for 22.04
+  ansible.builtin.shell: dpkg -i /tmp/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"
+  become: yes
+
+- name: install aws vpn client (ubuntu)
+  ansible.builtin.apt:
+    name: awsvpnclient
+    state: present
+    update_cache: yes
+  become: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: download aws cli installer
+  ansible.builtin.get_url:
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    dest: /tmp/awscli-exe-linux-x86_64.zip
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    mode: 0400
+  become: yes
+  when: ansible_distribution == "Ubuntu"
+
+- name: unarchive aws cli installer
+  ansible.builtin.unarchive:
+    src: /tmp/awscli-exe-linux-x86_64.zip
+    dest: /tmp/
+
+- name: run aws cli installer
+  ansible.builtin.shell: /tmp/aws/install --update
+  become: yes
+  when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"
+
+# gimme-aws-creds
+- name: install gimme-aws-creds
+  ansible.builtin.shell: /usr/bin/python3 -m pip install --upgrade gimme-aws-creds
+  when: ansible_distribution == "Ubuntu"

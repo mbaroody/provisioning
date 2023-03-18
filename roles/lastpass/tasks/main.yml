@@ -39,3 +39,12 @@
     state: present
     update_homebrew: yes
   when: ansible_distribution == "MacOSX"
+
+- name: add nice shell functions (zsh only)
+  ansible.builtin.copy:
+    src: files/lastpass.zsh
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/lastpass.zsh"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    mode: "0644"
+  when: preferred_shell == "zsh"
