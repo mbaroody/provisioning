@@ -15,16 +15,16 @@
     intellij_ce_vim: true
   roles:
     - { role: base, tags: [ "base" ] }
-    - { role: aws_developer, tags: [ "aws_developer" ] }
+    - { role: aws, tags: [ "aws" ] }
     - { role: dbeaver, tags: [ "dbeaver" ] }
     - { role: docker, tags: [ "docker" ] }
     - { role: fzf, tags: [ "fzf" ] }
     - { role: tmux, tags: [ "tmux" ] }
     - { role: intellij_ce, tags: [ "intellij_ce" ] }
-    - { role: java_developer, tags: [ "java_developer" ] }
-    - { role: javascript_developer, tags: [ "javascript_developer" ] }
-    - { role: python_developer, tags: [ "python_developer" ] }
+    - { role: java, tags: [ "java" ] }
+    - { role: javascript, tags: [ "javascript" ] }
+    - { role: python, tags: [ "python" ] }
     - { role: spotify, tags: [ "spotify" ] }
     - { role: nvim, tags: [ "nvim" ] }
     - { role: zsh, tags: [ "zsh" ] }
-    - { role: kubernetes_developer, tags: [ "kubernetes_developer" ] }
+    - { role: kubernetes, tags: [ "kubernetes" ] }

@@ -20,11 +20,11 @@
     - nvim
     - fzf
     - docker
-    - java_developer
+    - java
     - intellij_ce
-    - javascript_developer
-    - python_developer
-    - aws_developer
-    - kubernetes_developer
+    - javascript
+    - python
+    - aws
+    - kubernetes
     - dbeaver
     - spotify
