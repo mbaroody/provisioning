@@ -20,6 +20,7 @@
     - nvim
     - fzf
     - docker
+    - virtualbox
     - java
     - intellij_ce
     - javascript
@@ -28,3 +29,4 @@
     - kubernetes
     - dbeaver
     - spotify
+    - redis

@@ -1,0 +1,16 @@
+---
+# https://askubuntu.com/questions/811488/command-to-accept-virtualbox-puel-for-virtualbox-ext-pack-installation
+- name: auto accept virtualbox extension pack license
+  ansible.builtin.shell: echo virtualbox-ext-pack virtualbox-ext-pack/license select true | debconf-set-selections
+  become: yes
+  when: ansible_facts["os_family"] == "Debian"
+
+- name: install virtualbox
+  ansible.builtin.apt:
+    name:
+      - virtualbox
+      - virtualbox-ext-pack
+    state: present
+    update_cache: yes
+  become: yes
+  when: ansible_facts["os_family"] == "Debian"

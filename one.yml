@@ -28,3 +28,4 @@
     - { role: nvim, tags: [ "nvim" ] }
     - { role: zsh, tags: [ "zsh" ] }
     - { role: kubernetes, tags: [ "kubernetes" ] }
+    - { role: virtualbox, tags: [ "virtualbox" ] }

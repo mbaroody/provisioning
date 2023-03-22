@@ -18,10 +18,10 @@
 - name: update apt cache with AWS repo
   ansible.builtin.copy:
     src: files/aws-vpn-client.list
-    dest: "/etc/apt/sources.list.d/aws-vpn-client.list"
+    dest: /etc/apt/sources.list.d/aws-vpn-client.list
     owner: root
     group: root
-    mode: 0400
+    mode: 0444
   become: yes
 
 - name: download libssl workaround for 22.04
