@@ -31,7 +31,3 @@ brew install ansible git && \
 ```
 
 The last line, `ansible-playbook --ask-become playbook.yml`, can be run at anytime from `~/.provisioning`, for example after you've made tweeks to dotfiles in `~/.provisioning`.
-
-# FAQ
-## What are some useful links?
-* [https://ansible-tips-and-tricks.readthedocs.io](https://ansible-tips-and-tricks.readthedocs.io)
