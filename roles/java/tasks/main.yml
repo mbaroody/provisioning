@@ -1,14 +1,24 @@
 ---
+- name: mkdir /tmp/sdkman
+  ansible.builtin.file:
+    path: /tmp/sdkman
+    state: directory
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    mode: 0555
+  become: yes
+
 - name: download sdkman installer
   ansible.builtin.get_url:
     url: https://get.sdkman.io
-    dest: /tmp/sdkman-installer.sh
-    mode: 0500
+    dest: /tmp/sdkman/sdkman-installer.sh
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    mode: 0555
   become: yes
 
 - name: run sdkman installer
-  ansible.builtin.shell: /tmp/sdkman-installer.sh
-  become: yes
+  ansible.builtin.shell: /tmp/sdkman/sdkman-installer.sh
 
 - name: configure shell (zsh only)
   ansible.builtin.copy:

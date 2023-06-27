@@ -24,15 +24,16 @@
     mode: 0444
   become: yes
 
+# https://askubuntu.com/questions/1406567/amazon-workspaces-client-not-working-on-22-04/1406570#1406570
 - name: download libssl workaround for 22.04
   ansible.builtin.get_url:
-    url: http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
-    dest: "/tmp/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb"
+    url: http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb
+    dest: "/tmp/libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb"
     mode: "0440"
   when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"
 
 - name: install libssl workaround for 22.04
-  ansible.builtin.shell: dpkg -i /tmp/libssl1.1_1.1.1f-1ubuntu2.17_amd64.deb
+  ansible.builtin.shell: dpkg -i /tmp/libssl1.1_1.1.1f-1ubuntu2.19_amd64.deb
   when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "22.04"
   become: yes
 
