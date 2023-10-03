@@ -7,7 +7,7 @@
 
 - hosts: os_MacOSX
   roles:
-    - geerlingguy.homebrew
+    - geerlingguy.mac.homebrew
 
 - hosts: localhost
   vars:
@@ -16,17 +16,12 @@
   roles:
     - base
     - zsh
+    - iterm2
     - tmux
     - nvim
+    - vscode
     - fzf
     - docker
     - virtualbox
-    - java
-    - intellij_ce
     - javascript
-    - python
-    - aws
-    - kubernetes
-    - dbeaver
     - spotify
-    - redis
