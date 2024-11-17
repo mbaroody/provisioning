@@ -19,7 +19,7 @@
     - tmux
     - nvim
     - fzf
-    - docker
+    # - docker
     - virtualbox
     - java
     - javascript
