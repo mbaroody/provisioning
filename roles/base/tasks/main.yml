@@ -14,6 +14,7 @@
       - curl
       - network-manager-l2tp
       - network-manager-l2tp-gnome
+      - pdftk
     update_cache: yes
   become: yes
   when: ansible_distribution == "Ubuntu"
