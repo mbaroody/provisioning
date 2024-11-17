@@ -17,7 +17,7 @@
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
 - name: install latest version of node
-  ansible.builtin.command: |
+  ansible.builtin.command: >
     'export NVM_DIR="{{ ansible_env.HOME }}/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && nvm install node'
 
 - name: configure shell (zsh only)
