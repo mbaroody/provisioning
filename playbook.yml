@@ -19,8 +19,8 @@
     - tmux
     - nvim
     - fzf
-    # - docker
     - virtualbox
     - java
     - javascript
     - python
+    - r

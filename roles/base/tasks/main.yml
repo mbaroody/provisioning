@@ -17,8 +17,7 @@
   become: true
   when: ansible_distribution == "Ubuntu"
 
-- name: install snaps
-  community.general.snap:
+- community.general.snap:
     name:
       - nordvpn
       - code
@@ -26,9 +25,13 @@
       - dbeaver-ce
       - spotify
       - pdftk
-      - obsidian
       - k9s
-    options:
-      - obsidian:classic
+  become: true
+  when: ansible_distribution == "Ubuntu"
+
+- community.general.snap:
+    name:
+      - obsidian
+    classic: true
   become: true
   when: ansible_distribution == "Ubuntu"
