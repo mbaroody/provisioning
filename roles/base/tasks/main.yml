@@ -12,9 +12,7 @@
       - build-essential
       - gcc
       - curl
-      - network-manager-l2tp
-      - network-manager-l2tp-gnome
-      - insync
+      # - insync
     update_cache: true
   become: true
   when: ansible_distribution == "Ubuntu"
