@@ -8,7 +8,7 @@
 
 - name: install nvim (Ubuntu)
   community.general.snap: name=nvim classic=true
-  become: yes
+  become: true
   when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"
 
 - name: mkdir "{{ ansible_env.HOME}}/.config/nvim/"
@@ -47,7 +47,7 @@
 
 - name: install ripgrep for fuzzy searching files
   community.general.snap: name=ripgrep classic=true
-  become: yes
+  become: true
   when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"
 
 - name: configure shell (zsh only)

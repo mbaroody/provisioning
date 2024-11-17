@@ -1,9 +1,9 @@
 ---
 - name: update/upgrade system
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
     upgrade: "yes"
-  become: yes
+  become: true
   when: ansible_distribution == "Ubuntu"
 
 - name: install useful packages
@@ -14,7 +14,21 @@
       - curl
       - network-manager-l2tp
       - network-manager-l2tp-gnome
+      - insync
+    update_cache: true
+  become: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: install snaps
+  community.general.snap:
+    name:
+      - nordvpn
+      - code
+      - postman
+      - dbeaver-ce
+      - spotify
       - pdftk
-    update_cache: yes
-  become: yes
+      - dbeaver-ce
+      - obsidian
+      - k9s
   when: ansible_distribution == "Ubuntu"

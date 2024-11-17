@@ -1,2 +1,49 @@
-- include: ubuntu.yml
+---
+# https://cran.rstudio.com/
+- name: install required packages
+  ansible.builtin.apt:
+    name:
+      - software-properties-common
+      - dirmngr
+    install_recommends: false
+    update_cache: true
+  become: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: download key
+  ansible.builtin.command: |
+    gpg --homedir /tmp \
+      --no-default-keyring \
+      --keyring /etc/apt/keyrings/R.gpg \
+      --keyserver keyserver.ubuntu.com \
+      --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+  when: ansible_distribution == "Ubuntu"
+
+- name: verify the downloaded GPG key fingerprint
+  ansible.builtin.command: |
+    gpg --show-keys /etc/apt/keyrings/R.gpg | grep E298A3A825C0D65DFD57CBB651716619E084DAB9
+  args:
+    warn: false
+  register: gpg_verify
+  failed_when: '"E298A3A825C0D65DFD57CBB651716619E084DAB9" not in gpg_verify.stdout'
+  changed_when: false
+  when: ansible_distribution == "Ubuntu"
+
+- ansible.builtin.command: lsb_release -cs
+  register: ubuntu_release
+  when: ansible_distribution == "Ubuntu"
+
+- name: add cloud.r-project.org/bin/linux/ubuntu repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/R.gpg] https://cloud.r-project.org/bin/linux/ubuntu {{ ubuntu_release.stdout }}-cran40/"
+    state: present
+  become: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: install R
+  ansible.builtin.apt:
+    name: r-base
+    install_recommends: false
+    update_cache: true
+  become: true
   when: ansible_distribution == "Ubuntu"

@@ -6,7 +6,7 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_gid }}"
     mode: 0555
-  become: yes
+  become: true
 
 - name: download sdkman installer
   ansible.builtin.get_url:
@@ -15,7 +15,7 @@
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_gid }}"
     mode: 0555
-  become: yes
+  become: true
 
 - name: run sdkman installer
   ansible.builtin.shell: /tmp/sdkman/sdkman-installer.sh

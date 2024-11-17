@@ -1,7 +1,0 @@
----
-- name: install iTerm2
-  homebrew_cask:
-    name: iterm2
-    state: present
-    update_homebrew: yes
-  when: ansible_distribution == "MacOSX"

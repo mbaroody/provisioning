@@ -1,2 +1,0 @@
----
-code_user_dir: "{{ ansible_env.HOME }}/.config/Code/User"

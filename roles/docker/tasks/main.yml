@@ -21,8 +21,8 @@
       - curl
       - gnupg
       - lsb-release
-    update_cache: yes
-  become: yes
+    update_cache: true
+  become: true
   when: ansible_facts["os_family"] == "Debian"
 
 - name: download docker gpg key
@@ -30,14 +30,14 @@
     url: https://download.docker.com/linux/ubuntu/gpg
     dest: /tmp/docker.gpg
     mode: 0444
-  become: yes
+  become: true
   when: ansible_facts["os_family"] == "Debian"
 
 - name: add docker gpg key
   ansible.builtin.shell: cat /tmp/docker.gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
   args:
     creates: /etc/apt/keyrings/docker.gpg
-  become: yes
+  become: true
   when: ansible_facts["os_family"] == "Debian"
 
 - name: add apt repository
@@ -47,7 +47,7 @@
     owner: root
     group: root
     mode: 0444
-  become: yes
+  become: true
   when: ansible_facts["os_family"] == "Debian"
 
 - name: install pre-reqs
@@ -58,16 +58,16 @@
       - containerd.io
       - docker-buildx-plugin
       - docker-compose-plugin
-    update_cache: yes
-  become: yes
+    update_cache: true
+  become: true
   when: ansible_facts["os_family"] == "Debian"
 
 - name: add docker group
   ansible.builtin.shell: groupadd --force docker
-  become: yes
+  become: true
   when: ansible_facts["os_family"] == "Debian"
 
 - name: add docker group to user groups
   ansible.builtin.shell: usermod -aG docker "{{ ansible_env.USER }}"
-  become: yes
+  become: true
   when: ansible_facts["os_family"] == "Debian"

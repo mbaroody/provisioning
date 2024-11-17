@@ -5,14 +5,14 @@
 
 - name: install zsh
   apt: name=zsh update_cache=yes
-  become: yes
+  become: true
   when: ansible_distribution == "Ubuntu"
 
 - name: change default shell
   user:
     name: "{{ ansible_env.USER }}"
     shell: /bin/zsh
-  become: yes
+  become: true
 
 - name: install oh-my-zsh
   git:

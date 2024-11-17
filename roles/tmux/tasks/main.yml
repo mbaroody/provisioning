@@ -5,7 +5,7 @@
 
 - name: install tmux
   apt: name=tmux update_cache=yes
-  become: yes
+  become: true
   when: ansible_distribution == "Ubuntu"
 
 - name: tmux plugin manager
