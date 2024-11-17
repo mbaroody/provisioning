@@ -28,5 +28,7 @@
       - pdftk
       - obsidian
       - k9s
+    options:
+      - obsidian:classic
   become: true
   when: ansible_distribution == "Ubuntu"
