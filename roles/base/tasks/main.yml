@@ -25,6 +25,7 @@
       - spotify
       - pdftk
       - k9s
+      - docker
   become: true
   when: ansible_distribution == "Ubuntu"
 
