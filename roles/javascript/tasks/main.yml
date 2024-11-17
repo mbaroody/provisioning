@@ -1,9 +1,10 @@
 ---
 - name: get latest tags
-  ansible.builtin.get_url:
+  ansible.builtin.uri:
     url: https://api.github.com/repos/nvm-sh/nvm/tags
     headers:
       Accept: application/vnd.github.v3+json
+    return_content: true
   register: uri_res
 
 # - debug: var=uri_res.json[0].name verbosity=2
