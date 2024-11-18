@@ -17,6 +17,7 @@
       --keyring /etc/apt/keyrings/R.gpg \
       --keyserver keyserver.ubuntu.com \
       --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
+  become: true
   when: ansible_distribution == "Ubuntu"
 
 - name: verify the downloaded GPG key fingerprint

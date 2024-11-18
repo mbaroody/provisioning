@@ -35,7 +35,7 @@
 - name: configure shell (zsh only)
   ansible.builtin.copy:
     src: files/plugins/pdfutils
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/pdfutils"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     mode: 0644

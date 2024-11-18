@@ -18,7 +18,10 @@
 
 - name: install latest version of node
   ansible.builtin.shell: >
-    'export NVM_DIR="{{ ansible_env.HOME }}/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && nvm install node'
+    export NVM_DIR="{{ ansible_env.HOME }}/.nvm" && \
+      [ -s "$NVM_DIR/nvm.sh" ] && \
+      . "$NVM_DIR/nvm.sh" && \
+      nvm install node
 
 - name: configure shell (zsh only)
   ansible.builtin.copy:
