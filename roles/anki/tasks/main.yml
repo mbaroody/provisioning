@@ -12,7 +12,7 @@
 
 - name: Download the latest Anki release
   ansible.builtin.uri:
-    url: https://github.com/ankitects/anki/releases/download/{{ uri_res }}/anki-{{ uri_res }}-linux-qt6.tar.zst
+    url: 'https://github.com/ankitects/anki/releases/download/{{ uri_res }}/anki-{{ uri_res }}-linux-qt6.tar.zst'
     headers:
       Accept: application/vnd.github.v3+json
     dest: /tmp/anki-latest-linux-qt6.tar.zst
