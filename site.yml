@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  roles:
+    - base
+    - zsh
+    - tmux
+    - nvim
+    - fzf
+    - virtualbox
+    - java
+    - javascript
+    - python
+    - anki

@@ -51,4 +51,3 @@
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     mode: 0644
-  when: preferred_shell == "zsh"

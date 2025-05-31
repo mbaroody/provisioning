@@ -4,7 +4,6 @@
     update_cache: true
     upgrade: "yes"
   become: true
-  when: ansible_distribution == "Ubuntu"
 
 - name: install useful packages
   ansible.builtin.apt:
@@ -12,10 +11,8 @@
       - build-essential
       - gcc
       - curl
-      # - insync
     update_cache: true
   become: true
-  when: ansible_distribution == "Ubuntu"
 
 - community.general.snap:
     name:
@@ -24,25 +21,23 @@
       - dbeaver-ce
       - spotify
       - pdftk
-      - k9s
       - docker
-  become: true
-  when: ansible_distribution == "Ubuntu"
-
-- name: add docker group
-  ansible.builtin.shell: groupadd --force docker
-  become: true
-  when: ansible_distribution == "Ubuntu"
-
-- name: add docker group to user groups
-  ansible.builtin.shell: usermod -aG docker "{{ ansible_env.USER }}"
-  become: true
-  when: ansible_distribution == "Ubuntu"
-
-- community.general.snap:
-    name:
       - code
-      - obsidian
-    classic: true
+      # - insync
+      # - obsidian
   become: true
-  when: ansible_distribution == "Ubuntu"
+
+- name: Install Chrome
+  ansible.builtin.apt:
+    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+
+
+# - name: add docker group
+#   ansible.builtin.shell: groupadd --force docker
+#   become: true
+#   when: ansible_distribution == "Ubuntu"
+
+# - name: add docker group to user groups
+#   ansible.builtin.shell: usermod -aG docker "{{ ansible_env.USER }}"
+#   become: true
+#   when: ansible_distribution == "Ubuntu"
