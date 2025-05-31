@@ -20,6 +20,7 @@
 - ansible.builtin.unarchive:
     src: "/tmp/Zotero-{{ uri_res.json[0].name }}_linux-x86_64.tar.bz2"
     dest: /opt
+  become: true
 
 - ansible.builtin.command: "/opt/Zotero-{{ uri_res.json[0].name }}_linux-x86_64/set_launcher_icon"
 
