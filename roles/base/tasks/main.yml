@@ -34,12 +34,10 @@
   become: true
 
 
-# - name: add docker group
-#   ansible.builtin.shell: groupadd --force docker
-#   become: true
-#   when: ansible_distribution == "Ubuntu"
+- name: add docker group
+  ansible.builtin.shell: groupadd --force docker
+  become: true
 
-# - name: add docker group to user groups
-#   ansible.builtin.shell: usermod -aG docker "{{ ansible_env.USER }}"
-#   become: true
-#   when: ansible_distribution == "Ubuntu"
+- name: add docker group to user groups
+  ansible.builtin.shell: usermod -aG docker "{{ ansible_env.USER }}"
+  become: true
