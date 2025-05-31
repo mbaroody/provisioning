@@ -2,12 +2,15 @@
 - hosts: localhost
   roles:
     - base
-    - zsh
-    - tmux
-    - nvim
+    - anki
     - fzf
-    - virtualbox
+    - insync
     - java
     - javascript
+    - nvim
+    - obsidian
     - python
-    - anki
+    - tmux
+    - virtualbox
+    - zotero
+    - zsh
