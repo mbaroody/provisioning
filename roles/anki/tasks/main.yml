@@ -1,6 +1,5 @@
 ---
-- name: get latest tags
-  ansible.builtin.uri:
+- ansible.builtin.uri:
     url: https://api.github.com/repos/ankitects/anki/releases/latest
     headers:
       Accept: application/vnd.github.v3+json
@@ -10,18 +9,15 @@
 - debug: var=uri_res.json.tag_name verbosity=2
 - debug: var=ansible_dependent_role_names verbosity=2
 
-- name: Download the latest Anki release
-  ansible.builtin.uri:
+- ansible.builtin.uri:
     url: "https://github.com/ankitects/anki/releases/download/{{ uri_res.json.tag_name }}/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
     headers:
       Accept: application/vnd.github.v3+json
     dest: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
 
-- name: unarchive Anki
-  ansible.builtin.unarchive:
+- ansible.builtin.unarchive:
     src: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
-    dest: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6/"
+    dest: /opt
 
-- name: install Anki
-  ansible.builtin.command: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6/install.sh"
+- ansible.builtin.command: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6/install.sh"
   become: true
