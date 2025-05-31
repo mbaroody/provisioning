@@ -3,7 +3,6 @@
 - name: auto accept virtualbox extension pack license
   ansible.builtin.shell: echo virtualbox-ext-pack virtualbox-ext-pack/license select true | debconf-set-selections
   become: true
-  when: ansible_facts["os_family"] == "Debian"
 
 - name: install virtualbox
   ansible.builtin.apt:
@@ -13,4 +12,3 @@
     state: present
     update_cache: true
   become: true
-  when: ansible_facts["os_family"] == "Debian"

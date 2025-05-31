@@ -2,14 +2,9 @@
 ##########################################################
 # install vim + plugin hosts
 ##########################################################
-- name: install nvim (MacOS)
-  homebrew: name=neovim state=present update_homebrew=yes
-  when: ansible_distribution == "MacOSX"
-
 - name: install nvim (Ubuntu)
-  community.general.snap: name=nvim classic=true
+  community.general.snap: name=neovim
   become: true
-  when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"
 
 - name: mkdir "{{ ansible_env.HOME}}/.config/nvim/"
   file:
@@ -48,7 +43,6 @@
 - name: install ripgrep for fuzzy searching files
   community.general.snap: name=ripgrep classic=true
   become: true
-  when: ansible_facts["os_family"] == "Debian" or ansible_facts["os_family"] == "RedHat"
 
 - name: configure shell (zsh only)
   ansible.builtin.copy:
