@@ -1,12 +1,10 @@
 ---
-- name: update/upgrade system
-  ansible.builtin.apt:
+- ansible.builtin.apt:
     update_cache: true
     upgrade: "yes"
   become: true
 
-- name: install useful packages
-  ansible.builtin.apt:
+- ansible.builtin.apt:
     name:
       - build-essential
       - gcc
@@ -29,6 +27,7 @@
 - community.general.snap:
     name: code
     classic: true
+  become: true
 
 - ansible.builtin.apt:
     deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
