@@ -6,8 +6,8 @@
     return_content: true
   register: uri_res
 
-- debug: var=uri_res.json[0].tag_name verbosity=2
+- debug: var=uri_res.json.tag_name verbosity=2
 
 - ansible.builtin.apt:
-    deb: "https://github.com/obsidianmd/obsidian-releases/releases/download/{{ uri_res.json[0].tag_name }}/obsidian_{{ uri_res.json[0].tag_name | regex_replace('^v(.*)$', '\\1') }}_amd64.deb"
+    deb: "https://github.com/obsidianmd/obsidian-releases/releases/download/{{ uri_res.json.tag_name }}/obsidian_{{ uri_res.json.tag_name | regex_replace('^v(.*)$', '\\1') }}_amd64.deb"
   become: true
