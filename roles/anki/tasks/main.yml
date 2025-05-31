@@ -21,5 +21,8 @@
     dest: /opt
   become: true
 
-- ansible.builtin.command: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6/install.sh"
+- ansible.builtin.command: install.sh
+  args:
+    chdir: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6"
+    creates: /usr/local/share/anki/anki
   become: true
