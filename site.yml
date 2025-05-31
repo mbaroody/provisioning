@@ -2,6 +2,7 @@
 - hosts: localhost
   roles:
     - base
+    - zsh
     - anki
     - fzf
     - insync
@@ -13,4 +14,3 @@
     - tmux
     - virtualbox
     - zotero
-    - zsh
