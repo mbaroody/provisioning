@@ -1,0 +1,36 @@
+
+
+---
+- name: get latest tags
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/zotero/zotero/tags
+    headers:
+      Accept: application/vnd.github.v3+json
+    return_content: true
+  register: uri_res
+
+- debug: var=uri_res.json[0].name verbosity=2
+
+- name: Download the latest Zotero release
+  ansible.builtin.uri:
+    url: "https://download.zotero.org/client/release/{{ uri_res.json[0].name }}/Zotero-{{ uri_res.json[0].name }}_linux-x86_64.tar.bz2"
+    headers:
+      Accept: application/vnd.github.v3+json
+    dest: "/tmp/Zotero-{{ uri_res.json[0].name }}_linux-x86_64.tar.bz2"
+
+
+- name: unarchive Zotero tarball
+  ansible.builtin.unarchive:
+    src: "/tmp/Zotero-{{ uri_res.json[0].name }}_linux-x86_64.tar.bz2"
+    dest: "/opt/Zotero-{{ uri_res.json[0].name }}_linux-x86_64/"
+
+- name: set_launcher
+  ansible.builtin.command: "/opt/Zotero-{{ uri_res.json[0].name }}_linux-x86_64/set_launcher_icon"
+
+- name: Create a symbolic link
+  ansible.builtin.file:
+    src: "/opt/Zotero-{{ uri_res.json[0].name }}_linux-x86_64/"
+    dest: "/home/{{ ansible_user_id }}/.local/share/applications/zotero.desktop"
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    state: link

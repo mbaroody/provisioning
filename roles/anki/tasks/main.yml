@@ -12,17 +12,15 @@
 
 - name: Download the latest Anki release
   ansible.builtin.uri:
-    url: 'https://github.com/ankitects/anki/releases/download/{{ uri_res.json[0].tag_name }}/anki-{{ uri_res.json[0].tag_name }}-linux-qt6.tar.zst'
+    url: "https://github.com/ankitects/anki/releases/download/{{ uri_res.json[0].tag_name }}/anki-{{ uri_res.json[0].tag_name }}-linux-qt6.tar.zst"
     headers:
       Accept: application/vnd.github.v3+json
-    dest: /tmp/{{ uri_res.json[0].tag_name }}/anki-{{ uri_res.json[0].tag_name }}-linux-qt6.tar.zst
-  when: ansible_distribution == "Ubuntu"
+    dest: "/tmp/anki-{{ uri_res.json[0].tag_name }}-linux-qt6.tar.zst"
 
 - name: unarchive Anki
   ansible.builtin.unarchive:
-    src: /tmp/anki-latest-linux-qt6.tar.zst
-    dest: /opt/{{ uri_res.json[0].tag_name }}/anki-{{ uri_res.json[0].tag_name }}-linux-qt6/
-  when: ansible_distribution == "Ubuntu"
+    src: "/tmp/anki-{{ uri_res.json[0].tag_name }}-linux-qt6.tar.zst"
+    dest: "/opt/anki-{{ uri_res.json[0].tag_name }}-linux-qt6/"
 
 - name: install Anki
-  ansible.builtin.command: /opt/{{ uri_res.json[0].tag_name }}/anki-{{ uri_res.json[0].tag_name }}-linux-qt6/install.sh
+  ansible.builtin.command: "/opt/anki-{{ uri_res.json[0].tag_name }}-linux-qt6/install.sh"
