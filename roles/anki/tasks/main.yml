@@ -24,3 +24,4 @@
 
 - name: install Anki
   ansible.builtin.command: "/opt/anki-{{ uri_res.json[0].tag_name }}-linux-qt6/install.sh"
+  become: true

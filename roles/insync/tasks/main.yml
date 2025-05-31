@@ -11,5 +11,5 @@
 
 - ansible.builtin.apt:
     deb: "https://cdn.insynchq.com/builds/linux/{{ insync_version.stdout }}/insync_{{ insync_version.stdout }}-{{ ansible_distribution_release }}_amd64.deb"
-
+  become: true
 
