@@ -1,0 +1,15 @@
+---
+
+- name: Get latest Insync version for this distro
+  shell: |
+    curl -s https://apt.insync.io/ubuntu/dists/{{ ansible_distribution_release }}/non-free/binary-amd64/Packages \
+    | awk '/^Package: insync$/{found=1} found && /^Version: /{print $2; exit}'
+  register: insync_version
+
+- debug:
+    msg: "Latest Insync version: {{ insync_version.stdout }}"
+
+- ansible.builtin.apt:
+    deb: "https://cdn.insynchq.com/builds/linux/{{ insync_version.stdout }}/insync_{{ insync_version.stdout }}-{{ ansible_distribution_release }}_amd64.deb"
+
+
