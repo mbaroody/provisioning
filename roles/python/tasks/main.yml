@@ -1,4 +1,6 @@
 ---
+- ansible.builtin.command: python3 -m ensurepip --upgrade
+
 - name: download pyenv installer
   ansible.builtin.get_url:
     url: https://pyenv.run

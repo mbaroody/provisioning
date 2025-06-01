@@ -21,8 +21,6 @@
       - spotify
       - pdftk
       - docker
-      # - insync
-      # - obsidian
   become: true
 
 - community.general.snap:

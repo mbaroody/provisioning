@@ -2,8 +2,7 @@
 ##########################################################
 # install vim + plugin hosts
 ##########################################################
-- name: install nvim (Ubuntu)
-  community.general.snap: name=neovim
+- community.general.snap: name=neovim
   become: true
 
 - name: mkdir "{{ ansible_env.HOME}}/.config/nvim/"
