@@ -7,7 +7,7 @@
     update_cache: true
   become: true
 
-- ansible.builtin.command: pipx ensure path
+- ansible.builtin.command: pipx ensurepath
 - ansible.builtin.command: pipx install openai-whisper
 
 - name: download pyenv installer
