@@ -10,9 +10,15 @@
 - debug: var=uri_res verbosity=2
 # - debug: var=ansible_dependent_role_names verbosity=2
 
-- name: install latest nvm
-  ansible.builtin.command: >
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ uri_res.json.tag_name }}/install.sh | bash
+
+- ansible.builtin.uri:
+    url: "https://raw.githubusercontent.com/nvm-sh/nvm/{{ uri_res.json.tag_name }}/install.sh"
+    headers:
+      Accept: application/vnd.github.v3+json
+    dest: /tmp/nvm-install.sh
+    status_code: [200, 304]
+
+- ansible.builtin.command: /tmp/nvm-install.sh
   args:
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
