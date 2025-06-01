@@ -1,4 +1,49 @@
 ---
+- name: Ensure build dependencies are present
+  apt:
+    name:
+      - build-essential
+      - libssl-dev
+      - zlib1g-dev
+      - libbz2-dev
+      - libreadline-dev
+      - libsqlite3-dev
+      - wget
+      - curl
+      - llvm
+      - libncursesw5-dev
+      - xz-utils
+      - tk-dev
+      - libxml2-dev
+      - libxmlsec1-dev
+      - libffi-dev
+      - liblzma-dev
+    state: present
+  become: true
+
+- name: Download Python 3.11 source
+  get_url:
+    url: https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tgz
+    dest: /tmp/Python-3.11.9.tgz
+    mode: '0644'
+
+- name: Extract Python source
+  unarchive:
+    src: /tmp/Python-3.11.9.tgz
+    dest: /tmp
+    remote_src: yes
+
+- name: Compile and install Python 3.11 under /opt
+  shell: |
+    ./configure --prefix=/opt/python3.11 --enable-optimizations
+    make -j "$(nproc)"
+    make altinstall
+  args:
+    chdir: /tmp/Python-3.11.9
+    creates: /opt/python3.11/bin/python3.11
+  become: true
+
+
 - ansible.builtin.apt:
     name:
       - pipx
