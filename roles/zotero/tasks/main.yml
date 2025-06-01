@@ -22,10 +22,10 @@
     dest: /opt
   become: true
 
-- ansible.builtin.command: "/opt/Zotero-{{ uri_res.json[0].name }}_linux-x86_64/set_launcher_icon"
+- ansible.builtin.command: /opt/Zotero_linux-x86_64/set_launcher_icon
 
 - ansible.builtin.file:
-    src: "/opt/Zotero-{{ uri_res.json[0].name }}_linux-x86_64/"
+    src: /opt/Zotero_linux-x86_64/
     dest: "/home/{{ ansible_user_id }}/.local/share/applications/zotero.desktop"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
