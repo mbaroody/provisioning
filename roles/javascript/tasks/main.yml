@@ -20,6 +20,7 @@
 
 - ansible.builtin.command: /tmp/nvm-install.sh
   args:
+    chdir: /tmp
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
 - name: install latest version of node
