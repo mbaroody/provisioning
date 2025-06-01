@@ -1,14 +1,13 @@
 ---
 - ansible.builtin.apt:
     name:
-      - python3-pip
-      - python3-venv
       - pipx
+      - python3.11
     update_cache: true
   become: true
 
 - ansible.builtin.command: pipx ensurepath
-- ansible.builtin.command: pipx install openai-whisper
+- ansible.builtin.command: pipx install --python python3.11 openapi-whisper
 
 - name: download pyenv installer
   ansible.builtin.get_url:

@@ -21,6 +21,8 @@
       - spotify
       - pdftk
       - docker
+      - pulseaudio
+      - ffmpeg
   become: true
 
 - community.general.snap:
