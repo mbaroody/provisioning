@@ -1,5 +1,5 @@
 ---
-- name: Ensure build dependencies are present
+- name: install python build dependencies
   apt:
     name:
       - build-essential
@@ -21,19 +21,19 @@
     state: present
   become: true
 
-- name: Download Python 3.11 source
+- name: download python 3.11 source
   get_url:
     url: https://www.python.org/ftp/python/3.11.9/Python-3.11.9.tgz
     dest: /tmp/Python-3.11.9.tgz
     mode: '0644'
 
-- name: Extract Python source
+- name: extract python source
   unarchive:
     src: /tmp/Python-3.11.9.tgz
     dest: /tmp
     remote_src: yes
 
-- name: Compile and install Python 3.11 under /opt
+- name: compile and install python 3.11 under /opt
   shell: |
     ./configure --prefix=/opt/python3.11 --enable-optimizations
     make -j "$(nproc)"
@@ -43,15 +43,18 @@
     creates: /opt/python3.11/bin/python3.11
   become: true
 
-
-- ansible.builtin.apt:
+- name: install pipx
+  ansible.builtin.apt:
     name:
       - pipx
     update_cache: true
   become: true
 
-- ansible.builtin.command: pipx ensurepath
-- ansible.builtin.command: pipx install --python /opt/python3.11/bin/python3.11 openai-whisper
+- name: ensure pipx path
+  ansible.builtin.command: pipx ensurepath
+
+- name: install openai-whisper with pipx
+  ansible.builtin.command: pipx install --python /opt/python3.11/bin/python3.11 openai-whisper
 
 - name: download pyenv installer
   ansible.builtin.get_url:
@@ -67,7 +70,7 @@
   args:
     creates: "{{ ansible_env.HOME }}/.pyenv/"
 
-- name: configure shell (zsh only)
+- name: configure pyenv for zsh
   ansible.builtin.copy:
     src: files/pyenv.zsh
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/pyenv.zsh"

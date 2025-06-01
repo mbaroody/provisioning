@@ -2,17 +2,18 @@
 ##########################################################
 # install vim + plugin hosts
 ##########################################################
-- community.general.snap:
+- name: install nvim snap
+  community.general.snap:
     name: nvim
     classic: true
   become: true
 
-- name: mkdir "{{ ansible_env.HOME}}/.config/nvim/"
+- name: create nvim config directory
   file:
     name: "{{ ansible_env.HOME}}/.config/nvim/"
     state: directory
 
-- name: synchronize dotfiles
+- name: synchronize nvim dotfiles
   ansible.posix.synchronize:
     src: files/
     dest: "{{ ansible_env.HOME}}/.config/nvim/"
@@ -25,7 +26,7 @@
 - name: create autoload dir
   file: path="{{ ansible_env.HOME }}/.config/nvim/autoload" state=directory
 
-- name: install Plug
+- name: install vim-plug
   uri:
     url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     dest: "{{ ansible_env.HOME }}/.config/nvim/autoload/plug.vim"
@@ -33,7 +34,7 @@
 # - name: install jedi for python completion
 # pip: name=jedi state=present extra_args=--user
 
-- name: install plugins
+- name: install nvim plugins
   command: >
     nvim
       -c "source {{ ansible_env.HOME }}/.config/nvim/init.vim" \
@@ -41,6 +42,6 @@
       -c "CocInstall -sync" \
       -c "qall"
 
-- name: install ripgrep for fuzzy searching files
+- name: install ripgrep snap
   community.general.snap: name=ripgrep classic=true
   become: true

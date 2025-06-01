@@ -3,7 +3,7 @@
   apt: name=tmux update_cache=yes
   become: true
 
-- name: tmux plugin manager
+- name: install tmux plugin manager
   git:
     repo: https://github.com/tmux-plugins/tpm
     dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"

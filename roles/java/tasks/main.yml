@@ -13,7 +13,7 @@
   args:
     creates: "{{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh"
 
-- name: configure shell (zsh only)
+- name: configure sdkman for zsh
   ansible.builtin.copy:
     src: files/sdkman.zsh
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/sdkman.zsh"

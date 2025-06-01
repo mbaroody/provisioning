@@ -1,31 +1,35 @@
-
-
 ---
-- ansible.builtin.uri:
+- name: Get latest Zotero release tag from GitHub
+  ansible.builtin.uri:
     url: https://api.github.com/repos/zotero/zotero/tags
     headers:
       Accept: application/vnd.github.v3+json
     return_content: true
   register: uri_res
 
-- debug: var=uri_res.json[0].name verbosity=2
+- name: Debug Zotero release tag
+  debug: var=uri_res.json[0].name verbosity=2
 
-- ansible.builtin.uri:
+- name: Download Zotero release tarball
+  ansible.builtin.uri:
     url: "https://download.zotero.org/client/release/{{ uri_res.json[0].name }}/Zotero-{{ uri_res.json[0].name }}_linux-x86_64.tar.bz2"
     headers:
       Accept: application/vnd.github.v3+json
     dest: "/tmp/Zotero-{{ uri_res.json[0].name }}_linux-x86_64.tar.bz2"
     status_code: [200, 304]
 
-- ansible.builtin.unarchive:
+- name: Unarchive Zotero tarball to /opt
+  ansible.builtin.unarchive:
     src: "/tmp/Zotero-{{ uri_res.json[0].name }}_linux-x86_64.tar.bz2"
     dest: /opt
   become: true
 
-- ansible.builtin.command: /opt/Zotero_linux-x86_64/set_launcher_icon
+- name: Set Zotero launcher icon
+  ansible.builtin.command: /opt/Zotero_linux-x86_64/set_launcher_icon
 
-- ansible.builtin.file:
-    src: /opt/Zotero_linux-x86_64/
+- name: Link Zotero desktop file to local applications
+  ansible.builtin.file:
+    src: /opt/Zotero_linux-x86_64/zotero.desktop
     dest: "/home/{{ ansible_user_id }}/.local/share/applications/zotero.desktop"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"

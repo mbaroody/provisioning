@@ -1,5 +1,5 @@
 ---
-- name: get latest tags
+- name: get latest nvm release info
   ansible.builtin.uri:
     url: https://api.github.com/repos/nvm-sh/nvm/releases/latest
     headers:
@@ -7,11 +7,12 @@
     return_content: true
   register: uri_res
 
-- debug: var=uri_res verbosity=2
+- name: debug nvm release info
+  debug: var=uri_res verbosity=2
 # - debug: var=ansible_dependent_role_names verbosity=2
 
-
-- ansible.builtin.uri:
+- name: download nvm install script
+  ansible.builtin.uri:
     url: "https://raw.githubusercontent.com/nvm-sh/nvm/{{ uri_res.json.tag_name }}/install.sh"
     headers:
       Accept: application/vnd.github.v3+json
@@ -19,7 +20,8 @@
     status_code: [200, 304]
     mode: u=rwx,g=r,o=r
 
-- ansible.builtin.command: /tmp/nvm-install.sh
+- name: run nvm install script
+  ansible.builtin.command: /tmp/nvm-install.sh
   args:
     chdir: /tmp
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
@@ -31,7 +33,7 @@
       . "$NVM_DIR/nvm.sh" && \
       nvm install node
 
-- name: configure shell (zsh only)
+- name: configure nvm for zsh
   ansible.builtin.copy:
     src: files/nvm.zsh
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/nvm.zsh"

@@ -3,7 +3,7 @@
   homebrew: name=zsh state=present update_homebrew=yes
   when: ansible_distribution == "MacOSX"
 
-- name: install zsh
+- name: install zsh (ubuntu)
   apt: name=zsh update_cache=yes
   become: true
   when: ansible_distribution == "Ubuntu"
@@ -32,7 +32,7 @@
     mode: 0644
 
 ## add miscellaneous custom scripts
-- name: configure shell (zsh only)
+- name: copy pdfutils plugin
   ansible.builtin.copy:
     src: files/plugins/pdfutils
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins"
@@ -40,7 +40,7 @@
     group: "{{ ansible_user_gid | string }}"
     mode: 0644
 
-- name: configure shell (zsh only)
+- name: copy meetingtranscription plugin
   ansible.builtin.copy:
     src: files/plugins/meetingtranscription
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins"

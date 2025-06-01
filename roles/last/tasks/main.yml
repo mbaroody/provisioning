@@ -1,0 +1,20 @@
+- name: set pinned apps on the dock
+  become: true
+  become_user: "{{ ansible_user_id }}"
+  shell: |
+    gsettings set org.gnome.shell favorite-apps "[
+      'google-chrome.desktop',
+      'org.gnome.Nautilus.desktop',
+      'Zoom.desktop',
+      'anki.desktop',
+      'obsidian.desktop',
+      'microsoft-edge.desktop',
+      'code_code.desktop',
+      'spotify_spotify.desktop',
+      'okular_okular.desktop',
+      'zotero.desktop',
+      'org.gnome.Settings.desktop'
+    ]
+  environment:
+    DISPLAY: ":0"
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"

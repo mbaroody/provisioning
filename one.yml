@@ -3,3 +3,4 @@
   roles:
     - { role: nvim, tags: [ "nvim" ] }
     - { role: python, tags: [ "python" ] }
+    - { role: zotero, tags: [ "zotero" ] }

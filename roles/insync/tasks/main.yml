@@ -1,6 +1,5 @@
 ---
-
-- name: Get latest Insync version for this distro
+- name: get latest Insync version for this distro
   shell: |
     curl -s https://apt.insync.io/ubuntu/dists/{{ ansible_distribution_release }}/non-free/binary-amd64/Packages \
     | awk '/^Package: insync$/{found=1} found && /^Version: /{print $2; exit}'
