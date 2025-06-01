@@ -1,5 +1,6 @@
 ---
 - ansible.builtin.apt: name=python3-venv
+  become: true
 
 - ansible.builtin.pip: name=openai-whisper
 
