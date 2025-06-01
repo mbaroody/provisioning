@@ -3,10 +3,9 @@
     name:
       - python3-pip
       - python3-venv
+      - python3-openai-whisper
     update_cache: true
   become: true
-
-- ansible.builtin.pip: name=openai-whisper
 
 - name: download pyenv installer
   ansible.builtin.get_url:
