@@ -1,0 +1,12 @@
+{
+  "enablePopupDefinitions": true,
+  "enablePopupDefinitonsOnQuestions": true,
+  "enableArticleViewer": true,
+  "enableMobileSupport": false,
+  "enableQBankHomeIntegration": true,
+  "hotkeyOpenNextPopup": "Shift+F",
+  "hotkeyOpenPreviousPopup": "Shift+D",
+  "hotkeyClosePopup": "Shift+Esc",
+  "hotkeyToggleSidePanel": "Shift+A",
+  "styleColorHighlights": "#0fcad4"
+}

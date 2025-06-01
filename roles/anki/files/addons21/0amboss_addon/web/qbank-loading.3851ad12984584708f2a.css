@@ -1,0 +1,73 @@
+/*!
+ * AMBOSS Anki Add-on
+ * 
+ * Copyright (C) 2019-2022 AMBOSS MD Inc. <https://www.amboss.com/us>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version, with the additions
+ * listed at the end of the license file that accompanied this program.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * 
+ */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  color: #1a1c1c;
+}
+
+body.night-mode {
+  color: white;
+}
+
+.main-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-animation {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
+}
+
+#loading-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+@keyframes amboss-load-animation {
+  to {
+    stroke-dashoffset: 136;
+  }
+}
+
+.amboss-load {
+  stroke: rgb(22, 190, 157);
+  animation: 2s linear 0s infinite normal none running amboss-load-animation;
+  stroke-dasharray: 17px;
+}
+

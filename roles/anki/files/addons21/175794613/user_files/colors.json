@@ -1,0 +1,26 @@
+{
+    "light": {
+        "USER_COLOR": "#ceffce",
+        "FRIEND_COLOR": "#d9edff",
+        "GOLD_COLOR": "#fffab3",
+        "SILVER_COLOR": "#d5d5d5",
+        "BRONZE_COLOR": "#f8d1c0",
+        "ROW_LIGHT": "#ffffff",
+        "ROW_DARK": "#f5f5f5",
+        "LEAGUE_TOP": "#e1fff4",
+        "LEAGUE_BOTTOM": "#f7b8b8",
+        "LEAGUE_BOTTOM_USER": "#f7b8b8"
+    },
+    "dark": {
+        "USER_COLOR": "#4a614d",
+        "FRIEND_COLOR": "#334170",
+        "GOLD_COLOR": "#95923a",
+        "SILVER_COLOR": "#7d7d7d",
+        "BRONZE_COLOR": "#8c6549",
+        "ROW_LIGHT": "#3A3A3A",
+        "ROW_DARK": "#2F2F31",
+        "LEAGUE_TOP": "#365255",
+        "LEAGUE_BOTTOM": "#582828",
+        "LEAGUE_BOTTOM_USER": "#582828"
+    }
+}

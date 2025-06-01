@@ -26,3 +26,10 @@
     chdir: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6"
     creates: /usr/local/share/anki/anki
   become: true
+
+# sync addons
+- ansible.posix.synchronize:
+    src: files/
+    dest: "{{ ansible_env.HOME}}/.local/share/Anki2"
+    owner: yes
+    group: yes

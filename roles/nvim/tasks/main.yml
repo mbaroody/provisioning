@@ -12,7 +12,7 @@
     state: directory
 
 - name: synchronize dotfiles
-  synchronize:
+  ansible.posix.synchronize:
     src: files/
     dest: "{{ ansible_env.HOME}}/.config/nvim/"
     owner: yes

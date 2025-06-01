@@ -1,0 +1,2 @@
+- `auto rebuild interval` no longer works in 2.1.45+ because Card.flushSched was removed from Anki, see https://forums.ankiweb.net/t/anki-2-1-45-beta/10664/81 
+- A card can only be in one filtered deck. If a search term for a filtered deck matches a card that card is not included if it's already in another filtered deck. So the order in which filtered decks are built can be relevant. That's why I added the lists `"build first (exact match)"` and `"build last (exact match)"` to the config.

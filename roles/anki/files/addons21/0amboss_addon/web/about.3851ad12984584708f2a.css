@@ -1,0 +1,87 @@
+/*!
+ * AMBOSS Anki Add-on
+ * 
+ * Copyright (C) 2019-2022 AMBOSS MD Inc. <https://www.amboss.com/us>
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version, with the additions
+ * listed at the end of the license file that accompanied this program.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * 
+ */
+/* latin-ext */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v17/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/lato/v17/S6uyw4BMUTPHjx4wXiWtFCc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC,
+    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+body {
+  background-color: #ECECEC;
+}
+
+.amboss-about-logo {
+  text-align: center;
+  padding-top: 2em;
+  padding-bottom: 0.33em;
+}
+
+.amboss-about-text {
+  padding-left: 2em;
+  padding-right: 2em;
+  font-family: Lato, 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  font-size: 1em;
+}
+
+.amboss-about-center {
+  text-align: center;
+}
+
+.amboss-about-text-small {
+  font-size: 0.8em;
+}
+
+.amboss-about-header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.6em;
+  line-height: 2em;
+  color: #303438;
+  padding-bottom: 0.5em;
+}
+
+.amboss-about-copyright {
+  padding-bottom: 0.5em;
+}
+
+.amboss-about-version {
+  font-weight: bold;
+  padding-bottom: 0.5em;
+}
+
+.amboss-about-table {
+  margin-top: 1em;
+}
+

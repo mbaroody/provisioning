@@ -1,0 +1,13 @@
+{
+    "name": "Hint Hotkeys",
+    "package": "1844908621",
+    "ankiweb_id": "1844908621",
+    "author": "Glutanimate",
+    "version": "v1.0.0",
+    "homepage": "https://github.com/glutanimate/hint-hotkeys",
+    "conflicts": [
+        "hint_hotkeys"
+    ],
+    "mod": 1681481115,
+    "min_point_version": 49
+}

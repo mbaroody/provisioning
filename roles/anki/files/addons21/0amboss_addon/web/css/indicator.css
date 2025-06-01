@@ -1,0 +1,45 @@
+.amboss-indicator {
+  /* NOTE: Anki does not offer any convenience API to position toolbar items
+    top-right , so we position the indicator manually. This is not ideal in
+    terms of add-on compatibility, so we should switch to a different
+    approach as soon as feasible */
+  position: absolute;
+  right: 0.3em;
+  text-align: center;
+  height: 25px;
+  width: 108px;
+  top: 0.1em;
+  background-repeat: no-repeat;
+}
+
+.amboss-indicator-day {
+  background-image: url(../media/day-toggle-inactive.svg);
+}
+
+.amboss-indicator-day:hover {
+  background-image: url(../media/day-toggle-inactive-hover.svg);
+}
+
+.amboss-indicator-day.amboss-indicator-active {
+  background-image: url(../media/day-toggle-active.svg);
+}
+
+.amboss-indicator-day.amboss-indicator-active:hover {
+  background-image: url(../media/day-toggle-active-hover.svg);
+}
+
+.amboss-indicator-night {
+  background-image: url(../media/night-toggle-inactive.svg);
+}
+
+.amboss-indicator-night:hover {
+  background-image: url(../media/night-toggle-inactive-hover.svg);
+}
+
+.amboss-indicator-night.amboss-indicator-active {
+  background-image: url(../media/night-toggle-active.svg);
+}
+
+.amboss-indicator-night.amboss-indicator-active:hover {
+  background-image: url(../media/night-toggle-active-hover.svg);
+}

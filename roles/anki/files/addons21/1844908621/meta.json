@@ -1,0 +1,1 @@
+{"mod": 1681481583, "name": "Hint Hotkeys", "conflicts": ["hint_hotkeys"], "homepage": "https://github.com/glutanimate/hint-hotkeys", "min_point_version": 49, "max_point_version": 62, "branch_index": 1, "disabled": false, "config": {"hotkey_reveal_all": "Shift+X", "hotkey_reveal_one": "X"}}

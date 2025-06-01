@@ -1,0 +1,19 @@
+{   
+    "add empty,rebuild to each cog icon menu behind deck name": false,
+    "build exclude - exact match": [
+        ""
+    ],
+    "build exclude - partial match": [
+        ""
+    ],
+    "build first (exact match)": [
+        ""
+    ],
+    "build last (exact match)": [
+        ""
+        ],
+    "build only these partial matches - this overrides all other settings": [
+        ""
+    ],
+    "build - prioritize most nested subdecks": true
+}

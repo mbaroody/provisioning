@@ -10,6 +10,6 @@
     msg: "Latest Insync version: {{ insync_version.stdout }}"
 
 - ansible.builtin.apt:
-    deb: "https://cdn.insynchq.com/builds/linux/{{ insync_version.stdout }}/insync_{{ insync_version.stdout }}_amd64.deb"
+    deb: "https://cdn.insynchq.com/builds/linux/{{ insync_version.stdout | regex_replace('^(\\d+\\.\\d+\\.\\d+\\.\\d+)-\\w+$', '\\1') }}/insync_{{ insync_version.stdout }}_amd64.deb"
   become: true
 
