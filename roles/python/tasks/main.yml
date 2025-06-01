@@ -1,5 +1,7 @@
 ---
-- ansible.builtin.command: python3 -m ensurepip --upgrade
+- ansible.builtin.apt: name=python3-venv
+
+- ansible.builtin.pip: name=openai-whisper
 
 - name: download pyenv installer
   ansible.builtin.get_url:
