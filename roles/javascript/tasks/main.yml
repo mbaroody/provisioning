@@ -12,7 +12,7 @@
 
 - name: install latest nvm
   ansible.builtin.command: >
-    curl -o- 'https://raw.githubusercontent.com/nvm-sh/nvm/{{ uri_res.json.tag_name }}/install.sh' | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ uri_res.json.tag_name }}/install.sh | bash
   args:
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
