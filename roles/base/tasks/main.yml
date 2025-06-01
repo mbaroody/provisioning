@@ -9,6 +9,7 @@
       - build-essential
       - gcc
       - curl
+      - xclip
     update_cache: true
   become: true
 
