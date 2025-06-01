@@ -1,0 +1,12 @@
+---
+- name: add microsoft edge repository into sources list
+  ansible.builtin.apt_repository:
+    repo: deb https://packages.microsoft.com/repos/edge stable main
+    state: present
+
+- name: install microsoft edge
+  ansible.builtin.apt:
+    name:
+      - microsoft-edge-stable
+    update_cache: true
+  become: true

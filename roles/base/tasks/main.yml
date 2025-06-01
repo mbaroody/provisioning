@@ -12,7 +12,6 @@
       - gcc
       - curl
       - xclip
-      - microsoft-edge-stable
     update_cache: true
   become: true
 
