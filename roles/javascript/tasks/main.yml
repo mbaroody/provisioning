@@ -17,6 +17,7 @@
       Accept: application/vnd.github.v3+json
     dest: /tmp/nvm-install.sh
     status_code: [200, 304]
+    mode: u=rwx,g=r,o=r
 
 - ansible.builtin.command: /tmp/nvm-install.sh
   args:
