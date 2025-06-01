@@ -47,7 +47,6 @@
 - ansible.builtin.apt:
     name:
       - pipx
-      - python3.11
     update_cache: true
   become: true
 
