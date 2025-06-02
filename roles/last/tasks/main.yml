@@ -17,7 +17,6 @@
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
   become_user: "{{ ansible_user_id }}"
-  become: true
 
 - name: Set Dock position to bottom
   shell: gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
@@ -27,18 +26,18 @@
   become_user: "{{ ansible_user_id }}"
 
 - name: enable autohide for ubuntu dock (dash-to-dock)
-  become_user: "{{ ansible_user_id }}"
   shell: gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
   environment:
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+  become_user: "{{ ansible_user_id }}"
 
 - name: enable auto-hide for ubuntu dock (dash-to-dock)
-  become_user: "{{ ansible_user_id }}"
   shell: gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true
   environment:
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+  become_user: "{{ ansible_user_id }}"
 
 - name: Set auto-hide delay (optional, for faster hide)
   shell: gsettings set org.gnome.shell.extensions.dash-to-dock hide-delay 0.1
@@ -48,15 +47,15 @@
   become_user: "{{ ansible_user_id }}"
 
 - name: enable panel mode (non-extended dock height)
-  become_user: "{{ ansible_user_id }}"
   shell: gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
   environment:
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+  become_user: "{{ ansible_user_id }}"
 
 - name: enable dark mode (gnome color-scheme)
-  become_user: "{{ ansible_user_id }}"
   shell: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
   environment:
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+  become_user: "{{ ansible_user_id }}"
