@@ -32,8 +32,15 @@
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
   become_user: "{{ ansible_user_id }}"
 
-- name: enable auto-hide for ubuntu dock (dash-to-dock)
-  shell: gsettings set org.gnome.shell.extensions.dash-to-dock intellihide false
+- name: enable intellihide for ubuntu dock (dash-to-dock)
+  shell: gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true
+  environment:
+    DISPLAY: ":0"
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+  become_user: "{{ ansible_user_id }}"
+
+- name: set intellihide-mode to focus-application-windows
+  shell: gsettings set org.gnome.shell.extensions.dash-to-dock intellihide-mode 'FOCUS_APPLICATION_WINDOWS'
   environment:
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
