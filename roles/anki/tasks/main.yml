@@ -18,6 +18,7 @@
     headers:
       Accept: application/vnd.github.v3+json
     dest: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    creates: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
     status_code: [200, 304]
 
 - name: unarchive anki tarball

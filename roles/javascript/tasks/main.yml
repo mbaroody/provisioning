@@ -17,6 +17,7 @@
     headers:
       Accept: application/vnd.github.v3+json
     dest: /tmp/nvm-install.sh
+    creates: /tmp/nvm-install.sh
     status_code: [200, 304]
     mode: u=rwx,g=r,o=r
 
