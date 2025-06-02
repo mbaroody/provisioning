@@ -45,10 +45,10 @@
     deb: https://zoom.us/client/latest/zoom_amd64.deb
   become: true
 
-- name: install citrix deb
-  ansible.builtin.apt:
-    deb: https://downloads.citrix.com/23334/icaclient_25.03.0.66_amd64.deb
-  become: true
+# - name: install citrix deb
+#   ansible.builtin.apt:
+#     deb: https://downloads.citrix.com/23334/icaclient_25.03.0.66_amd64.deb
+#   become: true
 
 - name: add docker group
   ansible.builtin.shell: groupadd --force docker
