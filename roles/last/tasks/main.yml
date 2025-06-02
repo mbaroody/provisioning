@@ -73,16 +73,3 @@
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
   become_user: "{{ ansible_user_id }}"
-
-- name: clone orchis theme repo
-  git:
-    repo: https://github.com/vinceliuice/Orchis-theme.git
-    dest: /tmp/Orchis-theme
-    version: master
-
-- name: run orchis theme installer
-  command: ./install.sh -c dark -l
-  args:
-    chdir: /tmp/Orchis-theme
-  environment:
-    HOME: "{{ ansible_env.HOME }}"
