@@ -40,6 +40,13 @@
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
   become_user: "{{ ansible_user_id }}"
 
+- name: Enable panel mode (non-extended dock height)
+  become_user: "{{ ansible_user_id }}"
+  shell: gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
+  environment:
+    DISPLAY: ":0"
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+
 - name: enable dark mode (gnome color-scheme)
   become_user: "{{ ansible_user_id }}"
   shell: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
