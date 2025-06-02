@@ -1,7 +1,5 @@
 - name: set pinned apps on the dock
-  become: true
-  become_user: "{{ ansible_user_id }}"
-  shell: |
+  shell: >
     gsettings set org.gnome.shell favorite-apps "[
       'google-chrome.desktop',
       'org.gnome.Nautilus.desktop',
@@ -14,7 +12,30 @@
       'okular_okular.desktop',
       'zotero.desktop',
       'org.gnome.Settings.desktop'
-    ]
+    ]"
   environment:
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+  become_user: "{{ ansible_user_id }}"
+  become: true
+
+- name: Set Dock position to bottom
+  shell: gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
+  environment:
+    DISPLAY: ":0"
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+  become_user: "{{ ansible_user_id }}"
+
+- name: Enable auto-hide for the Dock
+  shell: gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+  environment:
+    DISPLAY: ":0"
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+  become_user: "{{ ansible_user_id }}"
+
+- name: Set auto-hide delay (optional, for faster hide)
+  shell: gsettings set org.gnome.shell.extensions.dash-to-dock intellihide-delay 0.1
+  environment:
+    DISPLAY: ":0"
+    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
+  become_user: "{{ ansible_user_id }}"
