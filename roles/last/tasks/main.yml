@@ -80,19 +80,6 @@
     dest: /tmp/Orchis-theme
     version: master
 
-- name: Run Orchis theme installer
-  command: ./install.sh -d ~/.themes -c dark --tweaks round
-  args:
-    chdir: /tmp/Orchis-theme
-  environment:
-    HOME: "{{ ansible_env.HOME }}"
-
-- name: clone orchis theme repo
-  git:
-    repo: https://github.com/vinceliuice/Orchis-theme.git
-    dest: /tmp/Orchis-theme
-    version: master
-
 - name: run orchis theme installer
   command: ./install.sh -c dark -l
   args:
