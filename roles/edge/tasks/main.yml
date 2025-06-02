@@ -1,13 +1,20 @@
 ---
-- name: add microsoft edge repository into sources list
+- name: download microsoft gpg key and store as trusted keyring
+  ansible.builtin.shell: |
+    wget -qO - https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /usr/share/keyrings/microsoft.gpg
+  args:
+    creates: /usr/share/keyrings/microsoft.gpg
+  become: true
+
+- name: add microsoft edge apt repository
   ansible.builtin.apt_repository:
-    repo: deb https://packages.microsoft.com/repos/edge stable main
+    repo: deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main
     state: present
   become: true
 
-- name: install microsoft edge
+- name: install microsoft edge stable
   ansible.builtin.apt:
-    name:
-      - microsoft-edge-stable
+    name: microsoft-edge-stable
+    state: present
     update_cache: true
   become: true
