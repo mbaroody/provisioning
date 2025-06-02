@@ -35,9 +35,10 @@
   become: true
 
 # sync addons
-- name: synchronize anki addons
-  ansible.posix.synchronize:
-    src: files/
-    dest: "{{ ansible_env.HOME}}/.local/share/Anki2"
-    owner: yes
-    group: yes
+- name: link anki addons directory
+  ansible.builtin.file:
+    src: "/home/{{ ansible_user_id }}/Insync/michael.w.baroody@gmail.com/Google Drive/addons21"
+    dest: "/home/{{ ansible_user_id }}/.local/share/Anki2/addons21"
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    state: link
