@@ -1,2 +1,0 @@
----
-code_usr_dir: "{{ ansible_env.HOME }}/Library/Application Support/Code/User"

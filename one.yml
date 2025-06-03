@@ -1,31 +1,7 @@
 ---
 - hosts: localhost
-  tasks:
-    - name: Classify hosts depending on their OS distribution
-      group_by:
-        key: os_{{ ansible_facts['distribution'] }}
-
-- hosts: os_MacOSX
   roles:
-    - geerlingguy.homebrew
-
-- hosts: localhost
-  vars:
-    preferred_shell: zsh
-    intellij_ce_vim: true
-  roles:
-    - { role: base, tags: [ "base" ] }
-    - { role: aws, tags: [ "aws" ] }
-    - { role: dbeaver, tags: [ "dbeaver" ] }
-    - { role: docker, tags: [ "docker" ] }
-    - { role: fzf, tags: [ "fzf" ] }
-    - { role: tmux, tags: [ "tmux" ] }
-    - { role: intellij_ce, tags: [ "intellij_ce" ] }
-    - { role: java, tags: [ "java" ] }
-    - { role: javascript, tags: [ "javascript" ] }
-    - { role: python, tags: [ "python" ] }
-    - { role: spotify, tags: [ "spotify" ] }
     - { role: nvim, tags: [ "nvim" ] }
-    - { role: zsh, tags: [ "zsh" ] }
-    - { role: kubernetes, tags: [ "kubernetes" ] }
-    - { role: virtualbox, tags: [ "virtualbox" ] }
+    - { role: python, tags: [ "python" ] }
+    - { role: zotero, tags: [ "zotero" ] }
+    - { role: last, tags: [ "last" ] }

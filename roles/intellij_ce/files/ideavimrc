@@ -1,6 +1,0 @@
-set commentary
-set surround
-
-inoremap jj <Esc>
-nnoremap j gj
-nnoremap k gk

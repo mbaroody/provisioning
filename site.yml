@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  roles:
+    - base
+    - zsh
+    - anki
+    - edge
+    - fzf
+    - insync
+    - java
+    - javascript
+    - nvim
+    - obsidian
+    - python
+    - tmux
+    - virtualbox
+    - zotero
+    - last

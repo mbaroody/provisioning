@@ -1,3 +1,0 @@
----
-- include: pia.yml
-  when: vpn_provider == "pia"

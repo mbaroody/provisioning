@@ -1,19 +1,59 @@
 ---
-- name: update/upgrade system
+- name: upgrade all packages
   ansible.builtin.apt:
-    update_cache: yes
+    update_cache: true
     upgrade: "yes"
-  become: yes
-  when: ansible_distribution == "Ubuntu"
+  become: true
 
-- name: install useful packages
+- name: install base apt packages
   ansible.builtin.apt:
     name:
       - build-essential
       - gcc
       - curl
-      - network-manager-l2tp
-      - network-manager-l2tp-gnome
-    update_cache: yes
-  become: yes
-  when: ansible_distribution == "Ubuntu"
+      - xclip
+    update_cache: true
+  become: true
+
+- name: install base snaps
+  community.general.snap:
+    name:
+      - nordvpn
+      - postman
+      - dbeaver-ce
+      - spotify
+      - pdftk
+      - docker
+      - pulseaudio
+      - ffmpeg
+      - okular
+  become: true
+
+- name: install vscode snap
+  community.general.snap:
+    name: code
+    classic: true
+  become: true
+
+- name: install google chrome deb
+  ansible.builtin.apt:
+    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  become: true
+
+- name: install zoom deb
+  ansible.builtin.apt:
+    deb: https://zoom.us/client/latest/zoom_amd64.deb
+  become: true
+
+# - name: install citrix deb
+#   ansible.builtin.apt:
+#     deb: https://downloads.citrix.com/23334/icaclient_25.03.0.66_amd64.deb
+#   become: true
+
+- name: add docker group
+  ansible.builtin.shell: groupadd --force docker
+  become: true
+
+- name: add user to docker group
+  ansible.builtin.shell: usermod -aG docker "{{ ansible_env.USER }}"
+  become: true

@@ -1,30 +1,43 @@
 ---
-- name: get latest tags
-  uri:
-    url: https://api.github.com/repos/nvm-sh/nvm/tags
-    method: GET
+- name: get latest nvm release info
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/nvm-sh/nvm/releases/latest
     headers:
       Accept: application/vnd.github.v3+json
+    return_content: true
   register: uri_res
 
-- debug: var=uri_res.json[0].name verbosity=2
-- debug: var=ansible_dependent_role_names verbosity=2
+- name: debug nvm release info
+  debug: var=uri_res verbosity=2
+# - debug: var=ansible_dependent_role_names verbosity=2
 
-- name: install latest nvm
-  shell: >
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ uri_res.json[0].name }}/install.sh | bash
+- name: download nvm install script
+  ansible.builtin.uri:
+    url: "https://raw.githubusercontent.com/nvm-sh/nvm/{{ uri_res.json.tag_name }}/install.sh"
+    headers:
+      Accept: application/vnd.github.v3+json
+    dest: /tmp/nvm-install.sh
+    creates: /tmp/nvm-install.sh
+    status_code: [200, 304]
+    mode: u=rwx,g=r,o=r
+
+- name: run nvm install script
+  ansible.builtin.command: /tmp/nvm-install.sh
   args:
+    chdir: /tmp
     creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
-    warn: false
 
 - name: install latest version of node
-  shell: 'export NVM_DIR="{{ ansible_env.HOME }}/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && nvm install node'
+  ansible.builtin.shell: >
+    export NVM_DIR="{{ ansible_env.HOME }}/.nvm" && \
+      [ -s "$NVM_DIR/nvm.sh" ] && \
+      . "$NVM_DIR/nvm.sh" && \
+      nvm install node
 
-- name: configure shell (zsh only)
+- name: configure nvm for zsh
   ansible.builtin.copy:
     src: files/nvm.zsh
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/nvm.zsh"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     mode: 0644
-  when: preferred_shell == "zsh"

@@ -1,14 +1,9 @@
 ---
 - name: install tmux
-  homebrew: name=tmux state=present update_homebrew=yes
-  when: ansible_distribution == "MacOSX"
-
-- name: install tmux
   apt: name=tmux update_cache=yes
-  become: yes
-  when: ansible_distribution == "Ubuntu"
+  become: true
 
-- name: tmux plugin manager
+- name: install tmux plugin manager
   git:
     repo: https://github.com/tmux-plugins/tpm
     dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"

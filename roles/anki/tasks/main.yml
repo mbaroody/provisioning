@@ -1,0 +1,50 @@
+---
+- name: get latest anki release info
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/ankitects/anki/releases/latest
+    headers:
+      Accept: application/vnd.github.v3+json
+    return_content: true
+  register: uri_res
+
+- name: debug latest anki tag
+  debug: var=uri_res.json.tag_name verbosity=2
+- name: debug dependent role names
+  debug: var=ansible_dependent_role_names verbosity=2
+
+- name: download anki release tarball
+  ansible.builtin.uri:
+    url: "https://github.com/ankitects/anki/releases/download/{{ uri_res.json.tag_name }}/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    headers:
+      Accept: application/vnd.github.v3+json
+    dest: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    creates: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    status_code: [200, 304]
+
+- name: unarchive anki tarball
+  ansible.builtin.unarchive:
+    src: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    dest: /opt
+  become: true
+
+- name: run anki install script
+  ansible.builtin.command: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6/install.sh"
+  args:
+    chdir: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6"
+    creates: /usr/local/share/anki/anki
+  become: true
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user_id }}/.local/share/Anki2"
+    state: directory
+    mode: '0755'
+
+# sync addons
+- name: link anki addons directory
+  ansible.builtin.file:
+    src: "/home/{{ ansible_user_id }}/Insync/michael.w.baroody@gmail.com/Google\ Drive/addons21"
+    dest: "/home/{{ ansible_user_id }}/.local/share/Anki2/addons21"
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    state: link

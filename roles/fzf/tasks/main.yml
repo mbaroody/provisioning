@@ -1,5 +1,5 @@
 ---
-- name: clone fzf
+- name: clone fzf repo
   git:
     repo: https://github.com/junegunn/fzf.git
     dest: "{{ ansible_env.HOME }}/.fzf"
@@ -8,11 +8,10 @@
 - name: run fzf install script
   ansible.builtin.shell: "{{ ansible_env.HOME }}/.fzf/install"
 
-- name: configure shell (zsh only)
+- name: configure fzf for zsh
   ansible.builtin.copy:
     src: files/fzf.zsh
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/fzf.zsh"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     mode: 0644
-  when: preferred_shell == "zsh"

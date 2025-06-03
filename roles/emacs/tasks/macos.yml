@@ -1,6 +1,0 @@
-- name: install dotfiles
-  synchronize:
-    src: files/
-    dest: "{{ ansible_env.HOME}}/.emacs.d/"
-    owner: yes
-    group: yes
