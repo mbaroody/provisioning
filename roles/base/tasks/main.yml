@@ -1,10 +1,4 @@
 ---
-- name: upgrade all packages
-  ansible.builtin.apt:
-    update_cache: true
-    upgrade: "yes"
-  become: true
-
 - name: install base apt packages
   ansible.builtin.apt:
     name:
@@ -45,10 +39,21 @@
     deb: https://zoom.us/client/latest/zoom_amd64.deb
   become: true
 
-# - name: install citrix deb
-#   ansible.builtin.apt:
-#     deb: https://downloads.citrix.com/23334/icaclient_25.03.0.66_amd64.deb
-#   become: true
+- name: install citrix (25.03.0.66)
+  ansible.builtin.apt:
+    deb: https://downloads.citrix.com/23334/icaclient_25.03.0.66_amd64.deb
+  become: true
+
+- name: install warp (25.03.0.66)
+  ansible.builtin.apt:
+    deb: https://releases.warp.dev/stable/v-11.2025.05.28.08.11.stable_03/warp-terminal_0.2025.05.28.08.11.stable.03_amd64.deb
+  become: true
+
+- name: upgrade all packages
+  ansible.builtin.apt:
+    update_cache: true
+    upgrade: "yes"
+  become: true
 
 - name: add docker group
   ansible.builtin.shell: groupadd --force docker
