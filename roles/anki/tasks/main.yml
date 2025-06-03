@@ -34,6 +34,12 @@
     creates: /usr/local/share/anki/anki
   become: true
 
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: "/home/{{ ansible_user_id }}/.local/share/Anki2"
+    state: directory
+    mode: '0755'
+
 # sync addons
 - name: link anki addons directory
   ansible.builtin.file:
