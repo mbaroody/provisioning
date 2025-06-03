@@ -33,7 +33,7 @@
 
 - name: install .zsh_history
   ansible.builtin.file:
-    src: "/home/{{ ansible_user_id }}/Insync/michael.w.baroody@gmail.com/Google Drive/zsh_history"
+    src: "/home/{{ ansible_user_id }}/Insync/michael.w.baroody@gmail.com/Google\ Drive/zsh_history"
     dest: "/home/{{ ansible_user_id }}/.zsh_history"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
