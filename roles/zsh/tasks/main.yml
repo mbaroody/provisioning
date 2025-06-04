@@ -38,6 +38,7 @@
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     state: link
+    force: true
 
 ## add miscellaneous custom scripts
 - name: copy pdfutils plugin

@@ -5,3 +5,4 @@
     - { role: python, tags: [ "python" ] }
     - { role: zotero, tags: [ "zotero" ] }
     - { role: last, tags: [ "last" ] }
+    - { role: citrix, tags: [ "citrix" ] }
