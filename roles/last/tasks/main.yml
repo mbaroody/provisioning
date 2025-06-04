@@ -49,6 +49,18 @@
 
 - name: configure extensions
   shell: |
+    gsettings set org.gnome.shell enabled-extensions "[
+      'ubuntu-dock@ubuntu.com',
+      'tiling-assistant@ubuntu.com',
+      'user-theme@gnome-shell-extensions.gcampax.github.com',
+      'system-monitor@gnome-shell-extensions.gcampax.github.com'
+    ]"
+    gsettings set org.gnome.shell disabled-extensions "[
+      'light-style@gnome-shell-extensions.gcampax.github.com',
+      'native-window-placement@gnome-shell-extensions.gcampax.github.com',
+      'windowsNavigator@gnome-shell-extensions.gcampax.github.com',
+      'window-list@gnome-shell-extensions.gcampax.github.com'
+    ]"
     gsettings set org.gnome.desktop.interface gtk-theme "Orchis-Dark"
     gsettings set org.gnome.shell.extensions.user-theme name "Orchis-Dark"
     gsettings set org.gnome.shell.extensions.system-monitor show-cpu true
