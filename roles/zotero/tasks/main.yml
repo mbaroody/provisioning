@@ -31,7 +31,7 @@
 - name: link zotero desktop file to local applications
   ansible.builtin.file:
     src: /opt/Zotero_linux-x86_64/zotero.desktop
-    dest: "/home/{{ ansible_user_id }}/.local/share/applications/zotero.desktop"
+    dest: "{{ ansible_env.HOME }}/.local/share/applications/zotero.desktop"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     state: link

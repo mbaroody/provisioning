@@ -1,5 +1,5 @@
-- name: set pinned apps on the dock
-  shell: >
+- name: configure default gui
+  shell: |
     gsettings set org.gnome.shell favorite-apps "[
       'google-chrome.desktop',
       'org.gnome.Nautilus.desktop',
@@ -13,63 +13,56 @@
       'zotero.desktop',
       'org.gnome.Settings.desktop'
     ]"
+    gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
+    gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
+    gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+    gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true
+    gsettings set org.gnome.shell.extensions.dash-to-dock intellihide-mode 'FOCUS_APPLICATION_WINDOWS'
+    gsettings set org.gnome.shell.extensions.dash-to-dock hide-delay 0.1
+    gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
   environment:
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
   become_user: "{{ ansible_user_id }}"
 
-- name: Set Dock position to bottom
-  shell: gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
+- name: download orchis theme
+  ansible.builtin.git:
+    repo: https://github.com/vinceliuice/Orchis-theme.git
+    dest: "{{ ansible_env.HOME }}/github/vinceliuice/Orchis-theme"
+
+- name: install orchis prerequisites
+  ansible.builtin.apt:
+    name:
+      - gnome-themes-extra
+      - gnome-tweaks
+      - gtk2-engines-murrine
+      - sassc
+      - gnome-shell-extensions
+    update_cache: true
+  become: true
+
+- name: install orchis theme
+  ansible.builtin.command: "./install.sh -c dark -l"
+  args:
+    chdir: "{{ ansible_env.HOME }}/github/vinceliuice/Orchis-theme"
+
+- name: configure extensions
+  shell: |
+    gsettings set org.gnome.desktop.interface gtk-theme "Orchis-Dark"
+    gsettings set org.gnome.shell.extensions.user-theme name "Orchis-Dark"
+    gsettings set org.gnome.shell.extensions.system-monitor show-cpu true
+    gsettings set org.gnome.shell.extensions.system-monitor show-download true
+    gsettings set org.gnome.shell.extensions.system-monitor show-memory true
+    gsettings set org.gnome.shell.extensions.system-monitor show-swap true
+    gsettings set org.gnome.shell.extensions.system-monitor show-upload true
   environment:
     DISPLAY: ":0"
     DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
   become_user: "{{ ansible_user_id }}"
 
-- name: disable dock-fixed for ubuntu dock (dash-to-dock)
-  shell: gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed false
-  environment:
-    DISPLAY: ":0"
-    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
-  become_user: "{{ ansible_user_id }}"
-
-- name: enable autohide for ubuntu dock (dash-to-dock)
-  shell: gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
-  environment:
-    DISPLAY: ":0"
-    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
-  become_user: "{{ ansible_user_id }}"
-
-- name: enable intellihide for ubuntu dock (dash-to-dock)
-  shell: gsettings set org.gnome.shell.extensions.dash-to-dock intellihide true
-  environment:
-    DISPLAY: ":0"
-    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
-  become_user: "{{ ansible_user_id }}"
-
-- name: set intellihide-mode to focus-application-windows
-  shell: gsettings set org.gnome.shell.extensions.dash-to-dock intellihide-mode 'FOCUS_APPLICATION_WINDOWS'
-  environment:
-    DISPLAY: ":0"
-    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
-  become_user: "{{ ansible_user_id }}"
-
-- name: Set auto-hide delay (optional, for faster hide)
-  shell: gsettings set org.gnome.shell.extensions.dash-to-dock hide-delay 0.1
-  environment:
-    DISPLAY: ":0"
-    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
-  become_user: "{{ ansible_user_id }}"
-
-- name: enable panel mode (non-extended dock height)
-  shell: gsettings set org.gnome.shell.extensions.dash-to-dock extend-height false
-  environment:
-    DISPLAY: ":0"
-    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
-  become_user: "{{ ansible_user_id }}"
-
-- name: enable dark mode (gnome color-scheme)
-  shell: gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-  environment:
-    DISPLAY: ":0"
-    DBUS_SESSION_BUS_ADDRESS: "unix:path=/run/user/1000/bus"
-  become_user: "{{ ansible_user_id }}"
+- name: remove dependencies that are no longer required and purge their configuration files
+  ansible.builtin.apt:
+    autoremove: yes
+    purge: true
+  become: true
