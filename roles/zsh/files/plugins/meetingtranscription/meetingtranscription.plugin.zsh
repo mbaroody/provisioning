@@ -1,8 +1,5 @@
 #!/usr/bin/env zsh
 
-# Exit on any error
-set -e
-
 # Function to record audio and transcribe with Whisper
 record_and_transcribe() {
   # Defaults

@@ -7,6 +7,7 @@
       - curl
       - xclip
       - htop
+      - pulseaudio
     update_cache: true
   become: true
 
@@ -19,10 +20,10 @@
       - spotify
       - pdftk
       - docker
-      - pulseaudio
       - ffmpeg
       - okular
       - transmission
+      - vlc
   become: true
 
 - name: install vscode snap

@@ -1,5 +1,5 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="afowler"
-plugins=( git kubectl pdfutils )
+plugins=( git kubectl pdfutils meetingtranscription )
 source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:$HOME/.local/bin
