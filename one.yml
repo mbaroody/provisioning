@@ -8,3 +8,4 @@
     - { role: last, tags: [ "last" ] }
     - { role: citrix, tags: [ "citrix" ] }
     - { role: zsh, tags: [ "zsh" ] }
+    - { role: javascript, tags: [ "javascript" ] }

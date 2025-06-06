@@ -1,4 +1,8 @@
 ---
+- name: install prereqs
+  ansible.builtin.apt: name=mpv update_cache=true
+  become: true
+
 - name: get latest anki release info
   ansible.builtin.uri:
     url: https://api.github.com/repos/ankitects/anki/releases/latest
