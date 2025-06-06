@@ -1,4 +1,8 @@
 ---
+- name: install zotero prerequisites
+  ansible.builtin.apt: name=libdbus-glib-1-2 update_cache=true
+  become: true
+
 - name: get latest zotero release tag from github
   ansible.builtin.uri:
     url: https://api.github.com/repos/zotero/zotero/tags

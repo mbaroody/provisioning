@@ -53,13 +53,9 @@ record_and_transcribe() {
     whisper "$FILENAME" --model small --language English --output_dir "$(dirname "$FILENAME")" --device cpu
   }
 
-  # Register cleanup on exit
-  TRAPEXIT() {
-    cleanup
-  }
-
   # Start recording# ZSH Plugin: record-whisper.zsh
   # Place this file in ~/.oh-my-zsh/custom/plugins/record-whisper/record-whisper.plugin.zsh
   echo "🎬 Recording started. Press CTRL+C to stop..."
   parec --format=s16le --rate=44100 --channels=2 --device=CombinedOutput.monitor | ffmpeg -f s16le -ar 44100 -ac 2 -i - "$FILENAME"
+  cleanup
 }

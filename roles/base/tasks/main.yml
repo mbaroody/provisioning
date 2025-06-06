@@ -24,6 +24,8 @@
       - okular
       - transmission
       - vlc
+      - gnome-calendar
+      - libreoffice
   become: true
 
 - name: install vscode snap
