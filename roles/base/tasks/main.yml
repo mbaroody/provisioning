@@ -26,6 +26,7 @@
       - vlc
       - gnome-calendar
       - libreoffice
+      - gimp
   become: true
 
 - name: install vscode snap
@@ -44,9 +45,9 @@
     deb: https://zoom.us/client/latest/zoom_amd64.deb
   become: true
 
-- name: install warp (25.03.0.66)
+- name: install warp
   ansible.builtin.apt:
-    deb: https://releases.warp.dev/stable/v0.2025.05.28.08.11.stable_03/warp-terminal_0.2025.05.28.08.11.stable.03_amd64.deb
+    deb: https://app.warp.dev/download?package=deb
   become: true
 
 - name: upgrade all packages
