@@ -9,3 +9,4 @@
     - { role: citrix, tags: [ "citrix" ] }
     - { role: zsh, tags: [ "zsh" ] }
     - { role: javascript, tags: [ "javascript" ] }
+    - { role: virtualbox, tags: [ "virtualbox" ] }
