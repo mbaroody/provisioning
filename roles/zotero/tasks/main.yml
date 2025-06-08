@@ -1,4 +1,8 @@
 ---
+- name: install zotero prerequisites
+  ansible.builtin.apt: name=libdbus-glib-1-2 update_cache=true
+  become: true
+
 - name: get latest zotero release tag from github
   ansible.builtin.uri:
     url: https://api.github.com/repos/zotero/zotero/tags
@@ -31,7 +35,7 @@
 - name: link zotero desktop file to local applications
   ansible.builtin.file:
     src: /opt/Zotero_linux-x86_64/zotero.desktop
-    dest: "/home/{{ ansible_user_id }}/.local/share/applications/zotero.desktop"
+    dest: "{{ ansible_env.HOME }}/.local/share/applications/zotero.desktop"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     state: link

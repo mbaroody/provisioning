@@ -1,0 +1,46 @@
+---
+- name: install citrix prerequisites
+  ansible.builtin.apt: name=net-tools update_cache=true
+  become: true
+
+- name: get latest citrix release info
+  ansible.builtin.uri:
+    url: https://www.citrix.com/downloads/workspace-app/linux/workspace-app-for-linux-latest.html
+    return_content: true
+  register: uri_res
+
+- name: extract download url
+  set_fact:
+    citrix_download_url: "{{ uri_res.content | regex_search('rel=\"(//downloads\\.citrix\\.com[^\"]+)\"', '\\1') | regex_replace('//downloads', 'https://downloads') }}"
+
+- debug: var=citrix_download_url verbosity=1
+
+- name: extract sha-256 hash
+  set_fact:
+    citrix_sha256: "{{ uri_res.content | regex_search('SHA-256 - ([a-f0-9]{64})', '\\1') }}"
+
+- name: download citrix installer
+  ansible.builtin.get_url:
+    url: "{{ citrix_download_url[0] }}"
+    dest: /tmp/icaclient.deb
+    mode: '0644'
+
+- name: calculate downloaded file's sha-256
+  ansible.builtin.command: sha256sum /tmp/icaclient.deb
+  register: sha256_output
+  changed_when: false
+
+- name: extract just the hash from sha256sum output
+  set_fact:
+    downloaded_sha256: "{{ sha256_output.stdout.split()[0] }}"
+
+- name: validate sha-256 hash
+  ansible.builtin.assert:
+    that:
+      - citrix_sha256[0] == downloaded_sha256
+    fail_msg: "SHA-256 hash mismatch! Download may be corrupt or tampered with."
+    success_msg: "SHA-256 hash matches. File is verified."
+
+- name: install citrix
+  ansible.builtin.apt: deb=/tmp/icaclient.deb
+  become: true

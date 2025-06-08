@@ -1,15 +1,13 @@
 # Provisioning
-Set of Ansible playbooks and roles to provision my personal dev machines.
+An Ansible playbook and full instructions to provision my personal dev machines.
 
 ## Prerequisites
-- must have `ansible` and `git` installed (`sudo apt-get install git ansible`), as well as [Insync](https://www.insynchq.com)
-- must login and sync with Insync Google Drive (expecting `~/Insync/michael.w.baroody@gmail.com/Google\ Drive`)
-- optional: login with VPN of choice
+- must have installed Ubuntu Desktop with secret `autoinstall.yml` Gist
+- **optional:** login with VPN of choice
+- log in and sync with Insync Google Drive (expecting `~/Insync/michael.w.baroody@gmail.com/Google\ Drive`) for Anki `addons21` and `zsh_history`
+- log in with GitHub and create a fine-grained personal access token with read/write access for SSH keys. make sure to copy this to your clipboard for use in the install script
 
 ## Usage
 ```bash
-mkdir -p ~/github/mbaroody && \
-git clone --depth=1 https://github.com/mbaroody/provisioning.git ~/github/mbaroody/provisioning && \
-cd ~/github/mbaroody/provisioning && \
-ansible-playbook --ask-become --inventory localhost site.yml
+wget -q https://gist.github.com/mbaroody/4491225f14eeab204289114e1b557f39/raw/67c92710d843348ee6fbba94499fba834cadd086/post-install.sh -O /tmp/post-install.sh && bash /tmp/post-install.sh
 ```

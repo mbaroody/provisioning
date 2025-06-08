@@ -9,6 +9,7 @@
 - name: add microsoft edge apt repository
   ansible.builtin.apt_repository:
     repo: deb [arch=amd64 signed-by=/usr/share/keyrings/microsoft.gpg] https://packages.microsoft.com/repos/edge stable main
+    filename: microsoft-edge.list
     state: present
   become: true
 

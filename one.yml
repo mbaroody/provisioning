@@ -1,7 +1,11 @@
 ---
 - hosts: localhost
   roles:
+    - { role: base, tags: [ "base" ] }
     - { role: nvim, tags: [ "nvim" ] }
     - { role: python, tags: [ "python" ] }
     - { role: zotero, tags: [ "zotero" ] }
     - { role: last, tags: [ "last" ] }
+    - { role: citrix, tags: [ "citrix" ] }
+    - { role: zsh, tags: [ "zsh" ] }
+    - { role: javascript, tags: [ "javascript" ] }

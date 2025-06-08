@@ -1,4 +1,8 @@
 ---
+- name: install prereqs
+  ansible.builtin.apt: name=mpv update_cache=true
+  become: true
+
 - name: get latest anki release info
   ansible.builtin.uri:
     url: https://api.github.com/repos/ankitects/anki/releases/latest
@@ -36,15 +40,15 @@
 
 - name: Create a directory if it does not exist
   ansible.builtin.file:
-    path: "/home/{{ ansible_user_id }}/.local/share/Anki2"
+    path: "{{ ansible_env.HOME }}/.local/share/Anki2"
     state: directory
     mode: '0755'
 
 # sync addons
 - name: link anki addons directory
   ansible.builtin.file:
-    src: "/home/{{ ansible_user_id }}/Insync/michael.w.baroody@gmail.com/Google\ Drive/addons21"
-    dest: "/home/{{ ansible_user_id }}/.local/share/Anki2/addons21"
+    src: "{{ ansible_env.HOME }}/Insync/michael.w.baroody@gmail.com/Google\ Drive/addons21"
+    dest: "{{ ansible_env.HOME }}/.local/share/Anki2/addons21"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     state: link
