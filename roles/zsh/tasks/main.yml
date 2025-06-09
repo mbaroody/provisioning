@@ -77,7 +77,7 @@
       Description=Backup zsh_history to Google Drive
 
       [Service]
-      ExecStart=/bin/cp "{{ ansible_env.HOME }}/.zsh_history" "{{ ansible_env.HOME }}/Insync/michael.w.baroody@gmail.com/Google Drive/zsh_history"
+      ExecStart=/usr/bin/rsync -au "{{ ansible_env.HOME }}/.zsh_history" "{{ ansible_env.HOME }}/Insync/michael.w.baroody@gmail.com/Google Drive/zsh_history"
       Type=oneshot
     owner: "{{ ansible_user_id }}"
     group: "{{ ansible_user_gid }}"
