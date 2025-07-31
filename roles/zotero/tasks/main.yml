@@ -39,3 +39,12 @@
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     state: link
+
+- name: link .zotero config directory
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/Insync/michael.w.baroody@gmail.com/Google\ Drive/zotero"
+    dest: "{{ ansible_env.HOME }}/.zotero"
+    owner: "{{ ansible_user_id | string }}"
+    group: "{{ ansible_user_gid | string }}"
+    state: link
+    force: true

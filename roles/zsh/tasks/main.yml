@@ -31,14 +31,13 @@
     group: "{{ ansible_env.USER }}"
     mode: 0644
 
-- name: install .zsh_history
-  ansible.builtin.file:
+- name: copy .zsh_history
+  ansible.builtin.copy:
+    remote_src: true
     src: "{{ ansible_env.HOME }}/Insync/michael.w.baroody@gmail.com/Google\ Drive/zsh_history"
     dest: "{{ ansible_env.HOME }}/.zsh_history"
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
-    state: link
-    force: true
 
 ## add miscellaneous custom scripts
 - name: copy pdfutils plugin
@@ -56,3 +55,55 @@
     owner: "{{ ansible_user_id | string }}"
     group: "{{ ansible_user_gid | string }}"
     mode: 0644
+
+# periodically backup .zsh_history
+- name: set github key name
+  set_fact:
+    service_name: zsh_history_backup
+
+- name: create user systemd directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/systemd/user"
+    state: directory
+    mode: 0755
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+
+- name: create backup systemd service
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/{{ service_name }}.service"
+    content: |
+      [Unit]
+      Description=Backup zsh_history to Google Drive
+
+      [Service]
+      ExecStart=/usr/bin/rsync -au "{{ ansible_env.HOME }}/.zsh_history" "{{ ansible_env.HOME }}/Insync/michael.w.baroody@gmail.com/Google Drive/zsh_history"
+      Type=oneshot
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    mode: 0644
+
+- name: create backup systemd timer
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.config/systemd/user/{{ service_name }}.timer"
+    content: |
+      [Unit]
+      Description=Run zsh_history backup every 2 minutes
+
+      [Timer]
+      OnBootSec=2min
+      OnUnitActiveSec=2min
+      Persistent=true
+
+      [Install]
+      WantedBy=default.target
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid }}"
+    mode: 0644
+
+- name: reload systemd user daemon and enable/start the timer
+  become: true
+  become_user: "{{ ansible_user_id }}"
+  ansible.builtin.shell: |
+    systemctl --user daemon-reload
+    systemctl --user enable --now "{{ service_name }}.timer"
