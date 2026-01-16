@@ -16,7 +16,6 @@
     name:
       - nordvpn
       - postman
-      - dbeaver-ce
       - spotify
       - pdftk
       - docker
@@ -24,7 +23,6 @@
       - okular
       - transmission
       - vlc
-      - gnome-calendar
       - libreoffice
       - gimp
   become: true

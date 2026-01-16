@@ -15,26 +15,37 @@
   debug: var=uri_res.json.tag_name verbosity=2
 - name: debug dependent role names
   debug: var=ansible_dependent_role_names verbosity=2
+  
+- name: derive major.minor anki version (drop patch)
+  ansible.builtin.set_fact:
+    anki_version_mm: "{{ uri_res.json.tag_name | regex_replace('\\.[0-9]+$', '') }}"
+
+- name: debug versions
+  debug:
+    msg:
+      full_tag: "{{ uri_res.json.tag_name }}"
+      major_minor: "{{ anki_version_mm }}"
+    verbosity: 2
 
 - name: download anki release tarball
   ansible.builtin.uri:
-    url: "https://github.com/ankitects/anki/releases/download/{{ uri_res.json.tag_name }}/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    url: "https://github.com/ankitects/anki/releases/download/{{ anki_version_mm }}/anki-launcher-{{ anki_version_mm }}-linux.tar.zst"
     headers:
       Accept: application/vnd.github.v3+json
-    dest: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
-    creates: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    dest: "/tmp/anki-{{ anki_version_mm }}-linux.tar.zst"
+    creates: "/tmp/anki-{{ anki_version_mm }}-linux.tar.zst"
     status_code: [200, 304]
 
 - name: unarchive anki tarball
   ansible.builtin.unarchive:
-    src: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    src: "/tmp/anki-{{ anki_version_mm }}-linux.tar.zst"
     dest: /opt
   become: true
 
 - name: run anki install script
-  ansible.builtin.command: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6/install.sh"
+  ansible.builtin.command: "/opt/anki-launcher-{{ anki_version_mm }}-linux/install.sh"
   args:
-    chdir: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6"
+    chdir: "/opt/anki-launcher-{{ anki_version_mm }}-linux"
     creates: /usr/local/share/anki/anki
   become: true
 
