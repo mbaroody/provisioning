@@ -8,6 +8,7 @@
       - xclip
       - htop
       - pulseaudio
+      - mplayer
     update_cache: true
   become: true
 

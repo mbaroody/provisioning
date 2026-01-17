@@ -18,23 +18,23 @@
 
 - name: download anki release tarball
   ansible.builtin.uri:
-    url: "https://github.com/ankitects/anki/releases/download/{{ uri_res.json.tag_name }}/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    url: "https://github.com/ankitects/anki/releases/download/{{ uri_res.json.tag_name }}/anki-launcher-{{ uri_res.json.tag_name }}-linux.tar.zst"
     headers:
       Accept: application/vnd.github.v3+json
-    dest: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
-    creates: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    dest: "/tmp/anki-launcher-{{ uri_res.json.tag_name }}-linux.tar.zst"
+    creates: "/tmp/anki-launcher-{{ uri_res.json.tag_name }}-linux.tar.zst"
     status_code: [200, 304]
 
 - name: unarchive anki tarball
   ansible.builtin.unarchive:
-    src: "/tmp/anki-{{ uri_res.json.tag_name }}-linux-qt6.tar.zst"
+    src: "/tmp/anki-launcher-{{ uri_res.json.tag_name }}-linux.tar.zst"
     dest: /opt
   become: true
 
 - name: run anki install script
-  ansible.builtin.command: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6/install.sh"
+  ansible.builtin.command: "/opt/anki-launcher-{{ uri_res.json.tag_name }}-linux/install.sh"
   args:
-    chdir: "/opt/anki-{{ uri_res.json.tag_name }}-linux-qt6"
+    chdir: "/opt/anki-launcher-{{ uri_res.json.tag_name }}-linux"
     creates: /usr/local/share/anki/anki
   become: true
 
